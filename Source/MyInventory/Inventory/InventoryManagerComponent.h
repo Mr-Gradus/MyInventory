@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "InventoryCellWidget.h"
 #include "InventoryComponent.h"
 #include "InventoryItem.h"
 #include "Components/ActorComponent.h"
@@ -10,6 +11,7 @@
 class UInventoryWidget;
 struct FInventoryItemInfo;
 class UInventoryComponent;
+class UInventoryCellWidget;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class MYINVENTORY_API UInventoryManagerComponent : public UActorComponent
@@ -19,9 +21,11 @@ class MYINVENTORY_API UInventoryManagerComponent : public UActorComponent
 public:	
 	UInventoryManagerComponent();
 
+	void OnItemDropped(UInventoryCellWidget* DraggedFrom, UInventoryCellWidget* DraggedTo) const;
+	
 	void Init(UInventoryComponent* InInventoryComponent);
 
-	FInventoryItemInfo* GetItemData(FName ItemID);
+	FInventoryItemInfo* GetItemData(FName ItemID) const;
 
 protected:
 	virtual void BeginPlay() override;

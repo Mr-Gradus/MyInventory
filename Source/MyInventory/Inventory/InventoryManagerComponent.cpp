@@ -1,12 +1,34 @@
 #include "InventoryManagerComponent.h"
-
 #include "InventoryWidget.h"
-#include "Engine/Engine.h"
+#include "Blueprint/DragDropOperation.h"
 
 UInventoryManagerComponent::UInventoryManagerComponent()
 {
-	PrimaryComponentTick.bCanEverTick = true;
+	PrimaryComponentTick.bCanEverTick = false;
+}
 
+void UInventoryManagerComponent::OnItemDropped(UInventoryCellWidget* DraggedFrom, UInventoryCellWidget* DraggedTo) const
+{
+	if(IsValid(DraggedFrom) || IsValid(DraggedTo))
+	{
+		const FInventorySlotInfo FromCell = DraggedFrom->GetItem();
+		const FInventorySlotInfo ToCell = DraggedTo->GetItem();
+
+		LocalInventoryComponent->SetItem(DraggedFrom->IndexInInventory, ToCell);
+		LocalInventoryComponent->SetItem(DraggedTo->IndexInInventory, FromCell);
+
+		const FInventoryItemInfo* FromData = GetItemData(FromCell.ItemID);
+		const FInventoryItemInfo* ToData = GetItemData(ToCell.ItemID);
+
+		DraggedFrom->Clear();
+		if (ToData)
+		{
+		    DraggedFrom->AddItem(ToCell, *ToData);
+		}
+		
+		DraggedTo->Clear();
+		DraggedTo->AddItem(FromCell, *FromData);
+	}
 }
 
 void UInventoryManagerComponent::BeginPlay()
@@ -24,11 +46,13 @@ void UInventoryManagerComponent::TickComponent(float DeltaTime, ELevelTick TickT
 void UInventoryManagerComponent::Init(UInventoryComponent* InInventoryComponent)
 {
 	LocalInventoryComponent = InInventoryComponent;
-	if (LocalInventoryComponent && InventoryItemsData)
+	if (IsValid(LocalInventoryComponent) && IsValid(InventoryItemsData))
 	{
 		ensure(InventoryWidgetClass);
 
 		InventoryWidget = CreateWidget<UInventoryWidget>(GetWorld(),	InventoryWidgetClass);
+
+		InventoryWidget->OnItemDrop.AddUObject(this, &UInventoryManagerComponent::OnItemDropped);
 
 		InventoryWidget->AddToViewport();
 
@@ -46,7 +70,7 @@ void UInventoryManagerComponent::Init(UInventoryComponent* InInventoryComponent)
 	}
 }
 
-FInventoryItemInfo * UInventoryManagerComponent::GetItemData(FName ItemID)
+FInventoryItemInfo * UInventoryManagerComponent::GetItemData(FName ItemID) const
 {
 	if (IsValid(InventoryItemsData))
 	{

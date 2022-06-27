@@ -70,4 +70,5 @@ public:
 	
 	UPROPERTY(EditAnywhere, Category = "Stats")
 	int32 Intelligence;
+
 };

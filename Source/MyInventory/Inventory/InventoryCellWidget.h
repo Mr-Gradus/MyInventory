@@ -8,6 +8,10 @@
 #include "InventoryCellWidget.generated.h"
 
 class UInventoryCellWidget;
+class UImage;
+class UTextBlock;
+
+DECLARE_MULTICAST_DELEGATE_TwoParams(FOnItemDrop, UInventoryCellWidget* DraggedFrom, UInventoryCellWidget* DroppedTo);
 
 UCLASS()
 class MYINVENTORY_API UInventoryCellWidget : public UUserWidget
@@ -20,13 +24,25 @@ public:
 
 	void Clear();
 
-	const FInventorySlotInfo& GetItem();
+	const FInventorySlotInfo& GetItem() const;
 
-	bool HasItem();
+	bool HasItem() const;
 
 	int32 IndexInInventory = -1;
+
+	FOnItemDrop OnItemDrop;
+
 protected:
 	bool bHasItem;
+
+	virtual FReply NativeOnMouseButtonDown(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent) override;
+
+	virtual void NativeOnDragDetected(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent, UDragDropOperation*& OutOperation) override;
+
+	virtual bool NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation) override;
+
+	UPROPERTY(EditAnywhere)
+	bool bIsDraggable = true;
 
 	UPROPERTY(meta = (BindWidgetOptional))
 	UImage* ItemImage;

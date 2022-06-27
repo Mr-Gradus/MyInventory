@@ -15,9 +15,15 @@ class MYINVENTORY_API UInventoryWidget : public UUserWidget
 
 public:
 
+	virtual void NativeConstruct() override;
+	
 	void Init(int32 ItemsNum);
 	
 	bool AddItem(const FInventorySlotInfo& Item, const FInventoryItemInfo& ItemInfo, int32 SlotPosition = -1);
+
+	UInventoryCellWidget* CreateCellWidget();
+
+	FOnItemDrop OnItemDrop;
 
 protected:
 	UPROPERTY(meta = (BindWidgetOptional))
@@ -35,5 +41,6 @@ protected:
 	UPROPERTY(meta = (BindWidgetOptional))
 	UInventoryCellWidget* GoldCell;
 
-	UInventoryCellWidget * CreateCellWidget();
+	void OnItemDropped(UInventoryCellWidget * DraggedFrom, UInventoryCellWidget * DroppedTo);
+
 };
