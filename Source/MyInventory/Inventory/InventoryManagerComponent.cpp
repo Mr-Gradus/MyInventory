@@ -14,9 +14,6 @@ void UInventoryManagerComponent::OnItemDropped(UInventoryCellWidget* DraggedFrom
 		const FInventorySlotInfo FromCell = DraggedFrom->GetItem();
 		const FInventorySlotInfo ToCell = DraggedTo->GetItem();
 
-		LocalInventoryComponent->SetItem(DraggedFrom->IndexInInventory, ToCell);
-		LocalInventoryComponent->SetItem(DraggedTo->IndexInInventory, FromCell);
-
 		const FInventoryItemInfo* FromData = GetItemData(FromCell.ItemID);
 		const FInventoryItemInfo* ToData = GetItemData(ToCell.ItemID);
 
@@ -28,6 +25,7 @@ void UInventoryManagerComponent::OnItemDropped(UInventoryCellWidget* DraggedFrom
 		
 		DraggedTo->Clear();
 		DraggedTo->AddItem(FromCell, *FromData);
+		
 	}
 }
 
