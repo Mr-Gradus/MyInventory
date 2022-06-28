@@ -98,4 +98,6 @@ void AMyInventoryCharacter::BeginPlay()
 	Super::BeginPlay();
 
 	InventoryManagerComponent->Init(InventoryComponent);
+
+	
 }

@@ -30,7 +30,7 @@ protected:
 	UUniformGridPanel* ItemCellsGrid;
 
 	UPROPERTY(EditDefaultsOnly)
-	int32 ItemsInRow = 5;
+	int32 ItemsInRow = 3;
 
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<UInventoryCellWidget> CellWidgetClass;
