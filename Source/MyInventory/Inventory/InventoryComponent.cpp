@@ -45,3 +45,5 @@ int32 UInventoryComponent::GetItemsNum() const
 {
 	return Items.Num();
 }
+
+

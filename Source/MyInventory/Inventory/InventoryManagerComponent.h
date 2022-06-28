@@ -27,6 +27,9 @@ public:
 
 	FInventoryItemInfo* GetItemData(FName ItemID) const;
 
+//	void LoadInventory();
+
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -34,8 +37,11 @@ protected:
 	UInventoryComponent* LocalInventoryComponent;
 
 	UPROPERTY(EditAnywhere)
-	UDataTable* InventoryItemsData;
+	UDataTable* InventoryData;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UDataTable* InventoryID;
+	
 	UPROPERTY()
     UInventoryWidget* InventoryWidget;
 
@@ -51,3 +57,4 @@ public:
 
 		
 };
+

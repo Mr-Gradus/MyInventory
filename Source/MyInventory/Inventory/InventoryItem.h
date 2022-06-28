@@ -22,7 +22,7 @@ enum class EItemRarity : uint8
 };
 
 USTRUCT(BlueprintType)
-struct FInventorySlotInfo
+struct FInventorySlotInfo : public FTableRowBase
 {
 	GENERATED_BODY()
 

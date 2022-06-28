@@ -1,6 +1,6 @@
-ID,ID,Name,Description,Type,Rarity,Icon,Damage,Armor,Intelligence
-Currency_Gold,Gold,Septim,Money,IT Currency,IR Common,"/Game/Inventory/Pict/Septim.Septim",0,0,0
-mSword,MSword,Brave Sword,Metal Sword,IT Equipment,IR Rare,"/Game/Inventory/Pict/Sword.Sword",3,0,0
-lArmor,lArmor,Cold Armor,Lether Armor,IT Equipment,IR Epic,"/Game/Inventory/Pict/Armor.Armor",0,2,0
-wShield,wShield,Shield of Forest,Wooden Shield,IT Equipment,IR Uncommon,"/Game/Inventory/Pict/Shield.Shield",0,1,0
-Gold_ring,gRing,Intellect Ring, Ring for up intellect,IT Miscellaneous,IR Legendary,"/Game/Inventory/Pict/Ring.Ring",0,0,4  
+Row Name,ItemID,Amount
+Currency_Gold,Currency_Gold,39841
+mSword,mSword,3
+lArmor,lArmor,3
+wShield,wShield,3
+Gold_ring,Gold_ring,3  

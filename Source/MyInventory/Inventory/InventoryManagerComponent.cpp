@@ -44,7 +44,7 @@ void UInventoryManagerComponent::TickComponent(float DeltaTime, ELevelTick TickT
 void UInventoryManagerComponent::Init(UInventoryComponent* InInventoryComponent)
 {
 	LocalInventoryComponent = InInventoryComponent;
-	if (IsValid(LocalInventoryComponent) && IsValid(InventoryItemsData))
+	if (IsValid(LocalInventoryComponent) && IsValid(InventoryData) && IsValid((InventoryID)))
 	{
 		ensure(InventoryWidgetClass);
 
@@ -56,8 +56,17 @@ void UInventoryManagerComponent::Init(UInventoryComponent* InInventoryComponent)
 
 		InventoryWidget->Init(FMath::Max(LocalInventoryComponent->GetItemsNum(), MinInventorySize));
 
-		for (auto& Item : LocalInventoryComponent->GetItems())
+		TArray<FInventorySlotInfo*> Slots;
+		InventoryID->GetAllRows<FInventorySlotInfo>("", Slots);
+		for (auto i = 0; i < Slots.Num(); ++i)
 		{
+			LocalInventoryComponent->SetItem(i, *Slots[i]);
+					
+		}	
+
+		for (auto&  Item: LocalInventoryComponent->GetItems()) 
+		{
+			
 			FInventoryItemInfo* ItemData = GetItemData(Item.Value.ItemID);
 			if (ItemData)
 			{
@@ -65,14 +74,36 @@ void UInventoryManagerComponent::Init(UInventoryComponent* InInventoryComponent)
 				InventoryWidget->AddItem(Item.Value, *ItemData, Item.Key);
 			}
 		}
+
 	}
 }
+// 
+/*
+*TArray<FInventorySlotInfo*> Slots;
+	InventoryList->GetAllRows<FInventorySlotInfo>("", Slots);
 
+	for (auto i = 0; i < Slots.Num(); ++i)
+	{
+		SetItem(i, *Slots[i]);
+	}
+ */
 FInventoryItemInfo * UInventoryManagerComponent::GetItemData(FName ItemID) const
 {
-	if (IsValid(InventoryItemsData))
+	if (IsValid(InventoryData))
 	{
-		return InventoryItemsData->FindRow<FInventoryItemInfo>(ItemID, "");
+		return InventoryData->FindRow<FInventoryItemInfo>(ItemID, "");
 	}
 	return nullptr;
 }
+/*
+void UInventoryManagerComponent::LoadInventory()
+{
+	TArray<FInventorySlotInfo*> Slots;
+	InventoryID->GetAllRows<FInventorySlotInfo>("", Slots);
+
+	for (auto i = 0; i < Slots.Num(); ++i)
+	{
+		SetItem(i, *Slots[i]);
+	}
+}
+*/
