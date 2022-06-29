@@ -24,6 +24,7 @@ public:
 
 	void Clear();
 
+	UFUNCTION(BlueprintCallable)
 	const FInventorySlotInfo& GetItem() const;
 
 	bool HasItem() const;
@@ -32,6 +33,8 @@ public:
 
 	FOnItemDrop OnItemDrop;
 
+	UFUNCTION(BlueprintCallable)
+	void SetSlotVisible(bool Value);
 protected:
 	bool bHasItem;
 

@@ -82,3 +82,16 @@ bool UInventoryWidget::AddItem(const FInventorySlotInfo & Item, const FInventory
 	}
 	return false;
 }
+
+void UInventoryWidget::SetFilterByType(const TEnumAsByte<EItemType> Type)
+{
+	if (!ItemCellsGrid) return;
+
+	for (UInventoryCellWidget* Widget : CellWidgets)
+	{
+		if (Widget->HasItem()) continue;
+
+		EItemType SlotType = Widget->GetItem().Type;
+		Widget->SetSlotVisible(Type == SlotType || Type == EItemType::All);
+	}
+}

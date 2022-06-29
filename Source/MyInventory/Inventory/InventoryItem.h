@@ -5,6 +5,7 @@
 UENUM()
 enum class EItemType : uint8
 {
+	All, 
 	IT_Miscellaneous,
 	IT_Currency,
 	IT_Equipment,
@@ -14,6 +15,7 @@ enum class EItemType : uint8
 UENUM()
 enum class EItemRarity : uint8
 {
+	All,
 	IR_Common,
 	IR_Uncommon,
     IR_Rare,
@@ -31,6 +33,8 @@ public:
 	FName ItemID;
 	UPROPERTY(EditAnywhere)
 	int32 Amount;
+	UPROPERTY(EditAnywhere)
+	EItemType Type;
 };
 
 

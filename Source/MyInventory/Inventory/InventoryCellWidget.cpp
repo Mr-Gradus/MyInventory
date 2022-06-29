@@ -89,3 +89,16 @@ bool UInventoryCellWidget::NativeOnDrop(const FGeometry& InGeometry, const FDrag
     }
 	return Super::NativeOnDrop(InGeometry, InDragDropEvent, InOperation);
 }
+
+void UInventoryCellWidget::SetSlotVisible(const bool Value)
+{
+	if (ItemImage)
+	{
+		ItemImage->SetVisibility(Value ? ESlateVisibility::SelfHitTestInvisible: ESlateVisibility::Collapsed);
+	}
+
+	if (CountText)
+	{
+		CountText->SetVisibility(Value ? ESlateVisibility::SelfHitTestInvisible: ESlateVisibility::Collapsed);
+	}
+}

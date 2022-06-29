@@ -1,6 +1,5 @@
-Row Name,ItemID,Amount
-Currency_Gold,Currency_Gold,39841
-mSword,mSword,3
-lArmor,lArmor,3
-wShield,wShield,3
-Gold_ring,Gold_ring,3  
+Row Name,Item ID,Amount
+Currency_Gold,Gold,300
+sAxe,sAxe,2
+lArmor,lArmor,1
+pHealth,pHealth,2

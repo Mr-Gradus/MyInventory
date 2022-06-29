@@ -43,4 +43,6 @@ protected:
 
 	void OnItemDropped(UInventoryCellWidget * DraggedFrom, UInventoryCellWidget * DroppedTo);
 
+	UFUNCTION(BlueprintCallable)
+	void SetFilterByType(const TEnumAsByte<EItemType> Type);
 };

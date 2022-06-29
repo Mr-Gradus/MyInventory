@@ -44,7 +44,7 @@ void UInventoryManagerComponent::TickComponent(float DeltaTime, ELevelTick TickT
 void UInventoryManagerComponent::Init(UInventoryComponent* InInventoryComponent)
 {
 	LocalInventoryComponent = InInventoryComponent;
-	if (IsValid(LocalInventoryComponent) && IsValid(InventoryData) && IsValid((InventoryID)))
+	if (IsValid(LocalInventoryComponent) && IsValid(InventoryData))
 	{
 		ensure(InventoryWidgetClass);
 
@@ -56,14 +56,17 @@ void UInventoryManagerComponent::Init(UInventoryComponent* InInventoryComponent)
 
 		InventoryWidget->Init(FMath::Max(LocalInventoryComponent->GetItemsNum(), MinInventorySize));
 
-		TArray<FInventorySlotInfo*> Slots;
-		InventoryID->GetAllRows<FInventorySlotInfo>("", Slots);
+		if (InventoryClass1)
+		LoadInventory(InventoryClass1);	
+
+		/*TArray<FInventorySlotInfo*> Slots;
+		InventoryClass1->GetAllRows<FInventorySlotInfo>("", Slots);
 		for (auto i = 0; i < Slots.Num(); ++i)
 		{
 			LocalInventoryComponent->SetItem(i, *Slots[i]);
 					
-		}	
-
+		}
+		*/
 		for (auto&  Item: LocalInventoryComponent->GetItems()) 
 		{
 			
@@ -77,16 +80,7 @@ void UInventoryManagerComponent::Init(UInventoryComponent* InInventoryComponent)
 
 	}
 }
-// 
-/*
-*TArray<FInventorySlotInfo*> Slots;
-	InventoryList->GetAllRows<FInventorySlotInfo>("", Slots);
 
-	for (auto i = 0; i < Slots.Num(); ++i)
-	{
-		SetItem(i, *Slots[i]);
-	}
- */
 FInventoryItemInfo * UInventoryManagerComponent::GetItemData(FName ItemID) const
 {
 	if (IsValid(InventoryData))
@@ -95,15 +89,14 @@ FInventoryItemInfo * UInventoryManagerComponent::GetItemData(FName ItemID) const
 	}
 	return nullptr;
 }
-/*
-void UInventoryManagerComponent::LoadInventory()
-{
-	TArray<FInventorySlotInfo*> Slots;
-	InventoryID->GetAllRows<FInventorySlotInfo>("", Slots);
 
-	for (auto i = 0; i < Slots.Num(); ++i)
-	{
-		SetItem(i, *Slots[i]);
-	}
+void UInventoryManagerComponent::LoadInventory(UDataTable* Class)
+{
+TArray<FInventorySlotInfo*> Slots;
+		Class->GetAllRows<FInventorySlotInfo>("", Slots);
+		for (auto i = 0; i < Slots.Num(); ++i)
+		{
+			LocalInventoryComponent->SetItem(i, *Slots[i]);
+					
+		}
 }
-*/
