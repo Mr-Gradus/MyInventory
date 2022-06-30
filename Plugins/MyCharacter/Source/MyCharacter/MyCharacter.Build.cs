@@ -1,10 +1,10 @@
-// Some copyright should be here...
+// Copyright Epic Games, Inc. All Rights Reserved.
 
 using UnrealBuildTool;
 
-public class InventoryPlugin : ModuleRules
+public class MyCharacter : ModuleRules
 {
-	public InventoryPlugin(ReadOnlyTargetRules Target) : base(Target)
+	public MyCharacter(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 		

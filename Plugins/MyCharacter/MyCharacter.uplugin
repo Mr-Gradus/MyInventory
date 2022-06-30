@@ -2,10 +2,10 @@
 	"FileVersion": 3,
 	"Version": 1,
 	"VersionName": "1.0",
-	"FriendlyName": "InventoryPlugin",
-	"Description": "",
+	"FriendlyName": "MyCharacter",
+	"Description": "Main game character ",
 	"Category": "Other",
-	"CreatedBy": "",
+	"CreatedBy": "Gradus",
 	"CreatedByURL": "",
 	"DocsURL": "",
 	"MarketplaceURL": "",
@@ -16,9 +16,9 @@
 	"Installed": false,
 	"Modules": [
 		{
-			"Name": "InventoryPlugin",
+			"Name": "MyCharacter",
 			"Type": "Runtime",
-			"LoadingPhase": "PreLoadingScreen"
+			"LoadingPhase": "Default"
 		}
 	]
 }

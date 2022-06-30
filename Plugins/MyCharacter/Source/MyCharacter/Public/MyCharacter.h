@@ -2,9 +2,10 @@
 
 #pragma once
 
+#include "CoreMinimal.h"
 #include "Modules/ModuleManager.h"
 
-class FInventoryPluginModule : public IModuleInterface
+class FMyCharacterModule : public IModuleInterface
 {
 public:
 
