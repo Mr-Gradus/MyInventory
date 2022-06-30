@@ -12,5 +12,15 @@
 				"UMG"
 			]
 		}
+	],
+	"Plugins": [
+		{
+			"Name": "ActorPalette",
+			"Enabled": true
+		},
+		{
+			"Name": "InventoryPlugin",
+			"Enabled": false
+		}
 	]
 }

@@ -100,4 +100,11 @@ void AMyInventoryCharacter::BeginPlay()
 	InventoryManagerComponent->Init(InventoryComponent);
 
 	
+	
+}
+
+void AMyInventoryCharacter::ChangeClassCharacter(UDataTable* ClassDataTable) const
+{
+	InventoryComponent->InventoryClass = ClassDataTable;
+	InventoryManagerComponent->Init(InventoryComponent);
 }

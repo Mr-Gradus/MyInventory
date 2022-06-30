@@ -32,7 +32,7 @@ UInventoryCellWidget* UInventoryWidget::CreateCellWidget()
 	return nullptr;
 }
 
-void UInventoryWidget::OnItemDropped(UInventoryCellWidget* DraggedFrom, UInventoryCellWidget* DroppedTo)
+void UInventoryWidget::OnItemDropped(UInventoryCellWidget* DraggedFrom, UInventoryCellWidget* DroppedTo) const
 {
 	if (OnItemDrop.IsBound())
 	{
@@ -83,7 +83,7 @@ bool UInventoryWidget::AddItem(const FInventorySlotInfo & Item, const FInventory
 	return false;
 }
 
-void UInventoryWidget::SetFilterByType(const TEnumAsByte<EItemType> Type)
+void UInventoryWidget::TypeFilter(const TEnumAsByte<EItemType> Type)
 {
 	if (!ItemCellsGrid) return;
 
@@ -91,7 +91,7 @@ void UInventoryWidget::SetFilterByType(const TEnumAsByte<EItemType> Type)
 	{
 		if (Widget->HasItem()) continue;
 
-		EItemType SlotType = Widget->GetItem().Type;
+		const EItemType SlotType = Widget->GetItem().Type;
 		Widget->SetSlotVisible(Type == SlotType || Type == EItemType::All);
 	}
 }

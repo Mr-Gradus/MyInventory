@@ -33,9 +33,7 @@ public:
 
 	int32 GetItemsNum() const;
 
-/// заполнение инвентаря 	
-
-	
-
+	UPROPERTY()
+	UDataTable* InventoryClass;
 
 };

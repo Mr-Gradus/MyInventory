@@ -56,28 +56,10 @@ void UInventoryManagerComponent::Init(UInventoryComponent* InInventoryComponent)
 
 		InventoryWidget->Init(FMath::Max(LocalInventoryComponent->GetItemsNum(), MinInventorySize));
 
-		if (InventoryClass1)
-		LoadInventory(InventoryClass1);	
-
-		/*TArray<FInventorySlotInfo*> Slots;
-		InventoryClass1->GetAllRows<FInventorySlotInfo>("", Slots);
-		for (auto i = 0; i < Slots.Num(); ++i)
+		if (LocalInventoryComponent->InventoryClass)
 		{
-			LocalInventoryComponent->SetItem(i, *Slots[i]);
-					
+			LoadInventory(LocalInventoryComponent->InventoryClass);
 		}
-		*/
-		for (auto&  Item: LocalInventoryComponent->GetItems()) 
-		{
-			
-			FInventoryItemInfo* ItemData = GetItemData(Item.Value.ItemID);
-			if (ItemData)
-			{
-				ItemData->Icon.LoadSynchronous();
-				InventoryWidget->AddItem(Item.Value, *ItemData, Item.Key);
-			}
-		}
-
 	}
 }
 
@@ -92,11 +74,16 @@ FInventoryItemInfo * UInventoryManagerComponent::GetItemData(FName ItemID) const
 
 void UInventoryManagerComponent::LoadInventory(UDataTable* Class)
 {
-TArray<FInventorySlotInfo*> Slots;
-		Class->GetAllRows<FInventorySlotInfo>("", Slots);
-		for (auto i = 0; i < Slots.Num(); ++i)
+	TArray<FInventorySlotInfo*> Slots;
+	Class->GetAllRows<FInventorySlotInfo>("", Slots);
+		for (auto i = 0; i < Slots.Num(); ++i)	
 		{
 			LocalInventoryComponent->SetItem(i, *Slots[i]);
-					
+				const FInventoryItemInfo* ItemData = GetItemData(Slots[i]->ItemID);
+				if (ItemData)
+				{
+					ItemData->Icon.LoadSynchronous();
+					InventoryWidget->AddItem(*Slots[i], *ItemData);
+				}
 		}
 }

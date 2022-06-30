@@ -1,0 +1,11 @@
+ID,ID,Name,Description,Type,Rarity,Icon,Damage,Armor,Intelligence
+Currency_Gold,Gold,Septim,Money,IT Currency,IR Common,"/Game/Inventory/Pict/Septim.Septim",0,0,0
+mSword,MSword,Brave Sword,Metal Sword,IT Equipment,IR Rare,"/Game/Inventory/Pict/Sword.Sword",7,0,0
+lArmor,lArmor,Cold Armor,Lether Armor,IT Equipment,IR Epic,"/Game/Inventory/Pict/Armor.Armor",0,5,0
+wShield,wShield,Shield of Forest,Wooden Shield,IT Equipment,IR Uncommon,"/Game/Inventory/Pict/Shield.Shield",0,3,0
+Gold_ring,gRing,Intellect Ring, Ring for up intellect,IT Miscellaneous,IR Legendary,"/Game/Inventory/Pict/Ring.Ring",0,0,10  
+wStaff,wStaff,Magic Staff,Staff green Magic,IT Equipment,IR Legendary,"/Game/Inventory/Pict/Staff.Staff",10,0,5
+sAxe,sAxe,Silver Axe,Dwarf Silver Axe,IT Equipment,IR Epic,"/Game/Inventory/Pict/SilverAxe.SilverAxe",7,0,0
+mArmor,mArmor,Magic Armor,Magic Elf's Armor,IT Equipment,IR Rare,"/Game/Inventory/Pict/MagicArmor.MagicArmor",0,5,1
+pHealth,pHealth,Health Potion,Potion Up Health,IT Consumable,IR Common,"/Game/Inventory/Pict/Health.Health",0,0,0  
+pMana,pMana,Mana Potion,Potion Up Mana,IT Consumable,IR Common,"/Game/Inventory/Pict/Mana.Mana",0,0,0

@@ -8,6 +8,7 @@
 #include "Inventory/InventoryManagerComponent.h"
 #include "MyInventoryCharacter.generated.h"
 
+
 UCLASS(Blueprintable)
 class AMyInventoryCharacter : public ACharacter
 {
@@ -20,7 +21,10 @@ public:
 	virtual void Tick(float DeltaSeconds) override;
 
 	virtual void BeginPlay() override;
-	
+
+	UFUNCTION(BlueprintCallable)
+	void ChangeClassCharacter(UDataTable* ClassDataTable) const;
+
 	/** Returns TopDownCameraComponent subobject **/
 	FORCEINLINE class UCameraComponent* GetTopDownCameraComponent() const { return TopDownCameraComponent; }
 	/** Returns CameraBoom subobject **/

@@ -41,8 +41,8 @@ protected:
 	UPROPERTY(meta = (BindWidgetOptional))
 	UInventoryCellWidget* GoldCell;
 
-	void OnItemDropped(UInventoryCellWidget * DraggedFrom, UInventoryCellWidget * DroppedTo);
+	void OnItemDropped(UInventoryCellWidget * DraggedFrom, UInventoryCellWidget * DroppedTo) const;
 
 	UFUNCTION(BlueprintCallable)
-	void SetFilterByType(const TEnumAsByte<EItemType> Type);
+	void TypeFilter(const TEnumAsByte<EItemType> Type);
 };

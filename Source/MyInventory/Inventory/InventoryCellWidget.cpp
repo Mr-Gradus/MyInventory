@@ -1,4 +1,4 @@
-#include "MyInventory/Inventory/InventoryCellWidget.h"
+#include "InventoryCellWidget.h"
 #include "InventoryDragDropOperation.h"
 #include "Blueprint/WidgetBlueprintLibrary.h"
 
@@ -11,14 +11,16 @@ bool UInventoryCellWidget::AddItem(const FInventorySlotInfo& Item, const FInvent
 	
 	if (ItemImage)
 	{
-		ItemImage->SetBrushFromTexture(ItemInfo.Icon.Get());
-		ItemImage->SetColorAndOpacity(FLinearColor(1.f, 1.f, 1.f));
+		ItemImage->SetBrushFromTexture(ItemInfo.Icon.LoadSynchronous());
+		//ItemImage->SetColorAndOpacity(FLinearColor(1.f, 1.f, 1.f));
 	}
 	
 	if (CountText)
 	{
 		CountText->SetText(FText::FromString(FString::FromInt(Item.Amount)));
 	}
+
+	
 	bHasItem = true;
 	StoredItem = Item;
 	return true;
@@ -26,6 +28,12 @@ bool UInventoryCellWidget::AddItem(const FInventorySlotInfo& Item, const FInvent
 
 void UInventoryCellWidget::Clear()
 {
+	if(!bHasItem)
+	{
+		return;
+	}
+
+	
 	if (ItemImage)
 	{
 		ItemImage->SetBrush(FSlateBrush());
@@ -77,8 +85,7 @@ void UInventoryCellWidget::NativeOnDragDetected(const FGeometry& InGeometry, con
 
 bool UInventoryCellWidget::NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation)
 {
-
-	UInventoryDragDropOperation* InventoryDragDropOperation = Cast<UInventoryDragDropOperation>(InOperation);
+	const UInventoryDragDropOperation* InventoryDragDropOperation = Cast<UInventoryDragDropOperation>(InOperation);
 
 	if (InventoryDragDropOperation && InventoryDragDropOperation->SourceCell != this)
     {
@@ -94,7 +101,9 @@ void UInventoryCellWidget::SetSlotVisible(const bool Value)
 {
 	if (ItemImage)
 	{
-		ItemImage->SetVisibility(Value ? ESlateVisibility::SelfHitTestInvisible: ESlateVisibility::Collapsed);
+		//ItemImage->SetVisibility(Value ? ESlateVisibility::SelfHitTestInvisible: ESlateVisibility::Collapsed);
+		ItemImage->SetBrush(FSlateBrush());
+		ItemImage->SetColorAndOpacity(FLinearColor(0.317708f, 0.259914f, 0.050768f, 1.f));
 	}
 
 	if (CountText)

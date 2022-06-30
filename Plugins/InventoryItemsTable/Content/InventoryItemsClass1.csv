@@ -1,0 +1,6 @@
+Row Name,Item ID,Amount,Type
+Currency_Gold,Gold,100,IT Currency
+mSword,MSword,1,IT Equipment
+lArmor,lArmor,1,IT Equipment
+wShield,wShield,1,IT Equipment
+pHealth,pHealth,3,IT Consumable
