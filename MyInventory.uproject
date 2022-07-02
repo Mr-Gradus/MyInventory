@@ -19,8 +19,8 @@
 			"Enabled": true
 		},
 		{
-			"Name": "InventoryPlugin",
-			"Enabled": false
+			"Name": "InventoryModule",
+			"Enabled": true
 		}
 	]
 }
