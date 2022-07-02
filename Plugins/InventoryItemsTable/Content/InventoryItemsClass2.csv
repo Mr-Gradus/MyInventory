@@ -1,5 +1,5 @@
-Row Name,Item ID,Amount
-Currency_Gold,Currency_Gold,300
-sAxe,sAxe,2
-lArmor,lArmor,1
-pHealth,pHealth,2
+Row Name,Item ID,Amount,Type
+Currency_Gold,Currency_Gold,300,IT Currency
+sAxe,sAxe,2,IT Equipment
+lArmor,lArmor,1,IT Equipment
+pHealth,pHealth,2,IT Consumable

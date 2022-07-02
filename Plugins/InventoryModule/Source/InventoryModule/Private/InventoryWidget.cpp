@@ -90,7 +90,7 @@ void UInventoryWidget::TypeFilter(const TEnumAsByte<EItemType> Type)
 
 	for (UInventoryCellWidget* Widget : CellWidgets)
 	{
-		if (Widget->HasItem()) continue;
+		if (Widget->IsEmpty()) continue;
 
 		const EItemType SlotType = Widget->GetItem().Type;
 		Widget->SetSlotVisible(Type == SlotType || Type == EItemType::All);

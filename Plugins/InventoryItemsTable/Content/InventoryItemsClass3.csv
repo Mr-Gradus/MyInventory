@@ -1,7 +1,7 @@
-Row Name,Item ID,Amount
-Currency_Gold,Currency_Gold,500
-wStaff,wStaff,1
-mArmor,mArmor,1
-Gold_ring,Gold_ring,3
-pHealth,pHealth,5
-pMana,pMana,4
+Row Name,Item ID,Amount,Type
+Currency_Gold,Currency_Gold,500,IT Currency
+wStaff,wStaff,1,IT Equipment
+mArmor,mArmor,1,IT Equipment
+Gold_ring,Gold_ring,3,IT Miscellaneous
+pHealth,pHealth,5,IT Consumable
+pMana,pMana,4,IT Consumable

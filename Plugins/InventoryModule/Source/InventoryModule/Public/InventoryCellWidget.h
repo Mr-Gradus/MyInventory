@@ -29,12 +29,13 @@ public:
 
 	bool HasItem() const;
 
-	int32 IndexInInventory;
+	int32 IndexInInventory = INDEX_NONE;
 
 	FOnItemDrop OnItemDrop;
 
 	UFUNCTION(BlueprintCallable)
 	void SetSlotVisible(bool Value);
+	bool IsEmpty() const;
 protected:
 	bool bHasItem;
 

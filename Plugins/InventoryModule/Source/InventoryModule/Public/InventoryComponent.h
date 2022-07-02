@@ -13,27 +13,27 @@ class INVENTORYMODULE_API UInventoryComponent : public UActorComponent
 
 public:	
 	UInventoryComponent();
+	virtual void BeginPlay() override;
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 protected:
-	virtual void BeginPlay() override;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TMap<int32, FInventorySlotInfo> Items;
 
-public:	
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
 	FInventorySlotInfo * GetItem(int32 SlotIndex);
+
 	
-    void SetItem(int32 SlotIndex, const FInventorySlotInfo& Item);
+	
+public:	
+
+	UPROPERTY()
+	UDataTable* InventoryClass;
+	
+	void SetItem(int32 SlotIndex, const FInventorySlotInfo& Item);
 
 	void ClearItem(int32 SlotIndex);
 
 	const TMap<int32, FInventorySlotInfo>& GetItems();
 
 	int32 GetItemsNum() const;
-
-	UPROPERTY()
-	UDataTable* InventoryClass;
-
 };
