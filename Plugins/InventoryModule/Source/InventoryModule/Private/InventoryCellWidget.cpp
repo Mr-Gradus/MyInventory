@@ -101,14 +101,14 @@ void UInventoryCellWidget::SetSlotVisible(const bool Value)
 {
 	if (ItemImage)
 	{
-		ItemImage->SetVisibility(Value ? ESlateVisibility::SelfHitTestInvisible: ESlateVisibility::Collapsed);
+		ItemImage->SetVisibility(Value ? ESlateVisibility::SelfHitTestInvisible: ESlateVisibility::Hidden);
 		//ItemImage->SetBrush(FSlateBrush());
 		//ItemImage->SetColorAndOpacity(FLinearColor(0.317708f, 0.259914f, 0.050768f, 1.f));
 	}
 
 	if (CountText)
 	{
-		CountText->SetVisibility(Value ? ESlateVisibility::SelfHitTestInvisible: ESlateVisibility::Collapsed);
+		CountText->SetVisibility(Value ? ESlateVisibility::SelfHitTestInvisible: ESlateVisibility::Hidden);
 	}
 }
 
