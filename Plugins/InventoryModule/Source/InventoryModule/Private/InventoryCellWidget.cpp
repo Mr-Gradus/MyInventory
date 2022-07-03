@@ -2,16 +2,23 @@
 #include "InventoryDragDropOperation.h"
 #include "Blueprint/WidgetBlueprintLibrary.h"
 
+
 bool UInventoryCellWidget::AddItem(const FInventorySlotInfo& Item, const FInventoryItemInfo& ItemInfo)
 {
-	if (bHasItem)
+	//if (bHasItem)
+	//{
+	//	return false;
+	//}
+
+	if (Item.Amount == 0)
 	{
-		return false;
+		Clear();
+		return true;
 	}
 	
 	if (ItemImage)
 	{
-		ItemImage->SetBrushFromTexture(ItemInfo.Icon.LoadSynchronous());
+		ItemImage->SetBrushFromTexture(ItemInfo.Icon.Get());
 		//ItemImage->SetColorAndOpacity(FLinearColor(1.f, 1.f, 1.f));
 	}
 	

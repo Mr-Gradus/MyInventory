@@ -1,6 +1,8 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "MyInventoryCharacter.h"
+
+#include "EquipInventoryComponent.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Camera/CameraComponent.h"
 #include "Components/DecalComponent.h"
@@ -42,7 +44,10 @@ AMyInventoryCharacter::AMyInventoryCharacter()
 	TopDownCameraComponent->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
 	InventoryComponent = CreateDefaultSubobject<UInventoryComponent>("Inventory");
+	EquipmentInventoryComponent = CreateDefaultSubobject<UEquipInventoryComponent>("EquipInventory");
 	InventoryManagerComponent = CreateDefaultSubobject<UInventoryManagerComponent>("InventoryManager");
+
+	
                          
 
 	// Create a decal in the world to show the cursor's location
@@ -97,7 +102,11 @@ void AMyInventoryCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-//	if(InventoryManagerComponent && InventoryComponent)
+
+	InventoryManagerComponent->InitEquipment(EquipmentInventoryComponent);
+
+
+	//	if(InventoryManagerComponent && InventoryComponent)
 //	{
 //		InventoryManagerComponent->Init(InventoryComponent);
 //	}
@@ -111,5 +120,6 @@ void AMyInventoryCharacter::ChangeClassCharacter(UDataTable* ClassDataTable) con
 	{
 		InventoryComponent->InventoryClass = ClassDataTable;
 		InventoryManagerComponent->Init(InventoryComponent);
+		
 	}
 }

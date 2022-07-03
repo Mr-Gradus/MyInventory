@@ -14,6 +14,19 @@ enum class EItemType : uint8
 };
 
 UENUM()
+enum class EEquipSlot : uint8
+{
+	ES_None,
+	ES_Head,
+	ES_Body,
+	ES_RightHand,
+	ES_LeftHand,
+	ES_Finger,
+	ES_Slot1,
+	ES_Slot2
+};
+
+UENUM()
 enum class EItemRarity : uint8
 {
 	All,
@@ -60,6 +73,10 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Typing")
 	EItemRarity Rarity;
+
+	UPROPERTY(EditAnywhere, Category = "Typing")
+	EEquipSlot EquipSlot;
+	
 	// visual representation
 	UPROPERTY(EditAnywhere, Category = "Visual")
 	TSoftObjectPtr<UTexture2D> Icon;

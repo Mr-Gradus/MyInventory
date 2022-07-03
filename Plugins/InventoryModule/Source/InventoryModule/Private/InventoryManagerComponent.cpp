@@ -10,25 +10,72 @@ UInventoryManagerComponent::UInventoryManagerComponent()
 
 void UInventoryManagerComponent::OnItemDropped(UInventoryCellWidget* DraggedFrom, UInventoryCellWidget* DraggedTo) const
 {
-	if(IsValid(DraggedFrom) || IsValid(DraggedTo))
+	if (!DraggedFrom || !DraggedTo)
 	{
-		const FInventorySlotInfo FromCell = DraggedFrom->GetItem();
-		const FInventorySlotInfo ToCell = DraggedTo->GetItem();
-
-		const FInventoryItemInfo* FromData = GetItemData(FromCell.ItemID);
-		const FInventoryItemInfo* ToData = GetItemData(ToCell.ItemID);
-
-		DraggedFrom->Clear();
-		if (ToData)
-		{
-		    DraggedFrom->AddItem(ToCell, *ToData);
-		}
-		
-		DraggedTo->Clear();
-		DraggedTo->AddItem(FromCell, *FromData);
-		
+		return;
 	}
+
+	UInventoryComponent* FromInventory = DraggedFrom->ParentInventoryWidget->RepresentedInventory;
+	UInventoryComponent* ToInventory = DraggedTo->ParentInventoryWidget->RepresentedInventory;
+
+	if (!FromInventory || !ToInventory)
+	{
+		return;
+	}
+
+	FInventorySlotInfo FromSlot = DraggedFrom->GetItem();
+	FInventorySlotInfo ToSlot = DraggedTo->GetItem();
+
+	if (FromSlot.Amount < 1)
+	{
+		return;
+	}
+
+	const FInventoryItemInfo* FromInfo = GetItemData(FromSlot.ItemID);
+	const FInventoryItemInfo* ToInfo = GetItemData(ToSlot.ItemID);
+
+	if (FromInfo == nullptr || (ToSlot.ItemID != NAME_None && ToInfo == nullptr))
+	{
+		return;
+	}
+
+	const int32 MaxCount = ToInventory->GetMaxItemAmount(DraggedTo->IndexInInventory, *FromInfo);
+	if (MaxCount == 0)
+	{
+		return;
+	}
+	else if (MaxCount > 0)
+	{
+		const int ItemsToAdd = FMath::Min(MaxCount, FromSlot.Amount);
+		ToSlot.Amount = FromSlot.Amount - ItemsToAdd;
+		ToSlot.ItemID = FromSlot.ItemID;
+
+		ToInfo = FromInfo;
+
+		FromSlot.Amount = ItemsToAdd;
+	}
+	else if (FromSlot.ItemID == ToSlot.ItemID)
+	{
+		FromSlot.Amount += ToSlot.Amount;
+		ToSlot.Amount = 0;
+	}
+
+	FromInventory->SetItem(DraggedFrom->IndexInInventory, ToSlot);
+	ToInventory->SetItem(DraggedTo->IndexInInventory, FromSlot);
+
+	DraggedFrom->Clear();
+
+	if (ToInfo)
+	{
+		DraggedFrom->AddItem(ToSlot, *ToInfo);
+	}
+
+	DraggedTo->Clear();
+	DraggedTo->AddItem(FromSlot, *FromInfo);
 }
+
+
+
 
 void UInventoryManagerComponent::BeginPlay()
 {
@@ -53,6 +100,8 @@ void UInventoryManagerComponent::Init(UInventoryComponent* InInventoryComponent)
 
 		InventoryWidget->OnItemDrop.AddUObject(this, &UInventoryManagerComponent::OnItemDropped);
 
+		InventoryWidget->RepresentedInventory = LocalInventoryComponent;
+		
 		InventoryWidget->AddToViewport();
 
 		InventoryWidget->Init(FMath::Max(LocalInventoryComponent->GetItemsNum(), MinInventorySize));
@@ -62,6 +111,19 @@ void UInventoryManagerComponent::Init(UInventoryComponent* InInventoryComponent)
 			LoadInventory(LocalInventoryComponent->InventoryClass);
 		}
 	}
+}
+
+void UInventoryManagerComponent::InitEquipment(UInventoryComponent* InInventoryComponent)
+{
+	ensure(EquipInventoryWidgetClass);
+
+	EquipInventoryWidget = CreateWidget<UInventoryWidget>(GetWorld(), EquipInventoryWidgetClass);
+
+	EquipInventoryWidget->OnItemDrop.AddUObject(this, &UInventoryManagerComponent::OnItemDropped);
+
+	EquipInventoryWidget->RepresentedInventory = InInventoryComponent;
+
+	EquipInventoryWidget->AddToViewport();
 }
 
 FInventoryItemInfo * UInventoryManagerComponent::GetItemData(FName ItemID) const

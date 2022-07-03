@@ -7,11 +7,11 @@
 #include "Components/TextBlock.h"
 #include "InventoryCellWidget.generated.h"
 
-class UInventoryCellWidget;
 class UImage;
 class UTextBlock;
+class UInventoryCellWidget;
 
-DECLARE_MULTICAST_DELEGATE_TwoParams(FOnItemDrop, UInventoryCellWidget* DraggedFrom, UInventoryCellWidget* DroppedTo);
+DECLARE_MULTICAST_DELEGATE_TwoParams(FOnItemDrop, UInventoryCellWidget* /*DraggedFrom*/, UInventoryCellWidget* /*DroppedTo*/);
 
 UCLASS()
 class INVENTORYMODULE_API UInventoryCellWidget : public UUserWidget
@@ -19,7 +19,7 @@ class INVENTORYMODULE_API UInventoryCellWidget : public UUserWidget
 	GENERATED_BODY()
 
 public:
-
+	
 	bool AddItem(const FInventorySlotInfo& Item, const FInventoryItemInfo& ItemInfo);
 
 	void Clear();
@@ -31,10 +31,14 @@ public:
 
 	int32 IndexInInventory = INDEX_NONE;
 
+	UPROPERTY()
+	class UInventoryWidget* ParentInventoryWidget;
+	
 	FOnItemDrop OnItemDrop;
 
 	UFUNCTION(BlueprintCallable)
 	void SetSlotVisible(bool Value);
+
 	bool IsEmpty() const;
 protected:
 	bool bHasItem;

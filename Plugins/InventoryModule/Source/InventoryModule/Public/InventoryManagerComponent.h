@@ -11,7 +11,6 @@
 class UInventoryWidget;
 struct FInventoryItemInfo;
 class UInventoryComponent;
-class UInventoryCellWidget;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class INVENTORYMODULE_API UInventoryManagerComponent : public UActorComponent
@@ -22,8 +21,10 @@ public:
 	UInventoryManagerComponent();
 
 	void OnItemDropped(UInventoryCellWidget* DraggedFrom, UInventoryCellWidget* DraggedTo) const;
-	
+
 	void Init(UInventoryComponent* InInventoryComponent);
+
+	void InitEquipment(UInventoryComponent * InInventoryComponent);
 
 	FInventoryItemInfo* GetItemData(FName ItemID) const;
 
@@ -47,6 +48,12 @@ protected:
 
     UPROPERTY(EditAnywhere)
     int32 MinInventorySize = 20;
+
+	UPROPERTY()
+	UInventoryWidget * EquipInventoryWidget;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UInventoryWidget> EquipInventoryWidgetClass;
 
 
 public:	

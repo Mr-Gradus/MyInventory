@@ -2,6 +2,7 @@
 
 #include <CoreMinimal.h>
 #include "InventoryCellWidget.h"
+#include "InventoryComponent.h"
 #include "InventoryItem.h"
 #include "Blueprint/UserWidget.h"
 //#include "Components/UniformGridPanel.h"
@@ -22,9 +23,12 @@ public:
 	
 	bool AddItem(const FInventorySlotInfo& Item, const FInventoryItemInfo& ItemInfo, int32 SlotPosition = -1);
 
-	UInventoryCellWidget* CreateCellWidget();
+	void InitCellWidget(UInventoryCellWidget* Widget);
 
 	FOnItemDrop OnItemDrop;
+
+	UPROPERTY()
+	UInventoryComponent * RepresentedInventory;
 
 protected:
 	UPROPERTY(meta = (BindWidgetOptional))
@@ -36,11 +40,14 @@ protected:
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<UInventoryCellWidget> CellWidgetClass;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadWrite)
 	TArray<UInventoryCellWidget*> CellWidgets;
 
 	UPROPERTY(meta = (BindWidgetOptional))
 	UInventoryCellWidget* GoldCell;
+
+	UInventoryCellWidget* CreateCellWidget();
+
 
 	void OnItemDropped(UInventoryCellWidget * DraggedFrom, UInventoryCellWidget * DroppedTo) const;
 

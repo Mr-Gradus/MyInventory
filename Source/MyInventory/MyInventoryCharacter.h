@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "EquipInventoryComponent.h"
 #include "InventoryComponent.h"
 #include "InventoryCellWidget.h"
 #include "GameFramework/Character.h"
@@ -42,7 +43,9 @@ public:
 
 	UPROPERTY(EditDefaultsOnly)
 	UInventoryManagerComponent* InventoryManagerComponent;
-	
+
+	UPROPERTY(EditDefaultsOnly)
+	UEquipInventoryComponent* EquipmentInventoryComponent;
 	
 private:
 	/** Top down camera */
