@@ -11,6 +11,30 @@ UInventoryManagerComponent::UInventoryManagerComponent()
 void UInventoryManagerComponent::OnItemDropped(UInventoryCellWidget* DraggedFrom, UInventoryCellWidget* DraggedTo)
 {
 
+	if(IsValid(DraggedFrom) || IsValid(DraggedTo))
+	{
+		const FInventorySlotInfo FromCell = DraggedFrom->GetItem();
+		const FInventorySlotInfo ToCell = DraggedTo->GetItem();
+
+		const FInventoryItemInfo* FromData = GetItemData(FromCell.ItemID);
+		const FInventoryItemInfo* ToData = GetItemData(ToCell.ItemID);
+
+		DraggedFrom->Clear();
+		if (ToData)
+		{
+			DraggedFrom->AddItem(ToCell, *ToData);
+		}
+		
+		DraggedTo->Clear();
+		DraggedTo->AddItem(FromCell, *FromData);
+	}
+
+/// Драг дроп для системы двух инвентарей не работает у меня
+
+
+
+
+	/*
 	if(DraggedFrom || DraggedTo)
 	{
 		return;	
@@ -74,16 +98,16 @@ void UInventoryManagerComponent::OnItemDropped(UInventoryCellWidget* DraggedFrom
 		DraggedTo->Clear();
 		DraggedTo->AddItem(FromCell, *FromData);
 		ToInventory->SetItem(DraggedTo->IndexInInventory, ToCell);
+*/
 
+	////////////////////////////////
 	/*
 
-	///////////////////////////
-
-	//if (FromData == nullptr || (ToCell.ItemID != NAME_None && ToData == nullptr))
-	//{
-	//	return;
-	//}
-	/*const int32 MaxCount = ToInventory->GetMaxItemAmount(DraggedTo->IndexInInventory, *FromData);
+	if (FromData == nullptr || (ToCell.ItemID != NAME_None && ToData == nullptr))
+	{
+		return;
+	}
+	const int32 MaxCount = ToInventory->GetMaxItemAmount(DraggedTo->IndexInInventory, *FromData);
 	if (MaxCount == 0)
 	{
 		return;
