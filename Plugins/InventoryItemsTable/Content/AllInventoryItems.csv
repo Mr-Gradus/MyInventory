@@ -1,11 +1,11 @@
-ID,ID,Name,Description,Type,Rarity,Icon,Damage,Armor,Intelligence
-Currency_Gold,Gold,Septim,Money,IT Currency,IR Common,"/InventoryModule/Icons/Septim.Septim",0,0,0
-mSword,MSword,Brave Sword,Metal Sword,IT Equipment,IR Rare,"/InventoryModule/Icons/Sword.Sword",7,0,0
-lArmor,lArmor,Cold Armor,Lether Armor,IT Equipment,IR Epic,"/InventoryModule/Icons/Armor.Armor",0,5,0
-wShield,wShield,Shield of Forest,Wooden Shield,IT Equipment,IR Uncommon,"/InventoryModule/Icons/Shield.Shield",0,3,0
-Gold_ring,gRing,Intellect Ring, Ring for up intellect,IT Miscellaneous,IR Legendary,"/InventoryModule/Icons/Ring.Ring",0,0,10  
-wStaff,wStaff,Magic Staff,Staff green Magic,IT Equipment,IR Legendary,"/InventoryModule/Icons/Staff.Staff",10,0,5
-sAxe,sAxe,Silver Axe,Dwarf Silver Axe,IT Equipment,IR Epic,"/InventoryModule/Icons/SilverAxe.SilverAxe",7,0,0
-mArmor,mArmor,Magic Armor,Magic Elf's Armor,IT Equipment,IR Rare,"/InventoryModule/Icons/MagicArmor.MagicArmor",0,5,1
-pHealth,pHealth,Health Potion,Potion Up Health,IT Consumable,IR Common,"/InventoryModule/Icons/Health.Health",0,0,0  
-pMana,pMana,Mana Potion,Potion Up Mana,IT Consumable,IR Common,"/InventoryModule/Icons/Mana.Mana",0,0,0
+ID,ID,Name,Description,Type,Rarity,Equip Slot,Icon,Mesh,Damage,Armor,Intelligence
+Currency_Gold,Gold,Septim,Money,IT Currency,IR Common,ES_None,"/InventoryModule/Icons/Septim.Septim",None,0,0,0
+mSword,MSword,Brave Sword,Metal Sword,IT Equipment,IR Rare,ES_RightHand,"/InventoryModule/Icons/Sword.Sword","/Game/Weapon_Pack/Mesh/Weapons/Weapons_Kit/SM_Sword.SM_Sword",7,0,0
+lArmor,lArmor,Cold Armor,Lether Armor,IT Equipment,IR Epic,ES_Body,"/InventoryModule/Icons/Armor.Armor","/Game/Geometry/Meshes/1M_Cube_Chamfer.1M_Cube_Chamfer",0,5,0
+wShield,wShield,Shield of Forest,Wooden Shield,IT Equipment,IR Uncommon,ES_LeftHand,"/InventoryModule/Icons/Shield.Shield","/Game/Weapon_Pack/Mesh/Weapons/Weapons_Kit/SM_Shield.SM_Shield",0,3,0
+Gold_ring,gRing,Intellect Ring, Ring for up intellect,IT Miscellaneous,IR Legendary,ES_Finger,"/InventoryModule/Icons/Ring.Ring","/Game/Geometry/Meshes/1M_Cube.1M_Cube",0,0,10  
+wStaff,wStaff,Magic Staff,Staff green Magic,IT Equipment,IR Legendary,ES_RightHand,"/InventoryModule/Icons/Staff.Staff","/Game/Weapon_Pack/Mesh/Weapons/Weapons_Kit/SM_Mace.SM_Mace",10,0,5
+sAxe,sAxe,Silver Axe,Dwarf Silver Axe,IT Equipment,IR Epic,ES_RightHand,"/InventoryModule/Icons/SilverAxe.SilverAxe","/Game/Weapon_Pack/Mesh/Weapons/Weapons_Kit/SM_Axe.SM_Axe",7,0,0
+mArmor,mArmor,Magic Armor,Magic Elf's Armor,IT Equipment,IR Rare,ES_Body,"/InventoryModule/Icons/MagicArmor.MagicArmor","/Game/Weapon_Pack/Mesh/Props/Interior/SM_Barrel.SM_Barrel",0,5,1
+pHealth,pHealth,Health Potion,Potion Up Health,IT Consumable,IR Common,ES_Slot1,"/InventoryModule/Icons/Health.Health","/Game/Geometry/Meshes/1M_Cube.1M_Cube",0,0,0  
+pMana,pMana,Mana Potion,Potion Up Mana,IT Consumable,IR Common,ES_Slot2,"/InventoryModule/Icons/Mana.Mana","/Game/Geometry/Meshes/1M_Cube.1M_Cube",0,0,0

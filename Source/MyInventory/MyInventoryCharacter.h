@@ -30,6 +30,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void ChangeClassCharacter(UDataTable* ClassDataTable) const;
+	void EquipItem(EEquipSlot Slot, FName ItemID);
+	void UnequipItem(EEquipSlot Slot, FName ItemID);
+	UStaticMeshComponent* GetEquipComponent(EEquipSlot Slot) const;
 
 	/** Returns TopDownCameraComponent subobject **/
 	FORCEINLINE class UCameraComponent* GetTopDownCameraComponent() const { return TopDownCameraComponent; }

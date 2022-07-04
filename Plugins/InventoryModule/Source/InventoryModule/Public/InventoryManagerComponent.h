@@ -20,7 +20,7 @@ class INVENTORYMODULE_API UInventoryManagerComponent : public UActorComponent
 public:	
 	UInventoryManagerComponent();
 
-	void OnItemDropped(UInventoryCellWidget* DraggedFrom, UInventoryCellWidget* DraggedTo) const;
+	void OnItemDropped(UInventoryCellWidget* DraggedFrom, UInventoryCellWidget* DraggedTo);
 
 	void Init(UInventoryComponent* InInventoryComponent);
 

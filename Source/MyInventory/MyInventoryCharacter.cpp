@@ -102,8 +102,10 @@ void AMyInventoryCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-
+if(InventoryManagerComponent && EquipmentInventoryComponent)
+{
 	InventoryManagerComponent->InitEquipment(EquipmentInventoryComponent);
+}
 
 
 	//	if(InventoryManagerComponent && InventoryComponent)
@@ -122,4 +124,71 @@ void AMyInventoryCharacter::ChangeClassCharacter(UDataTable* ClassDataTable) con
 		InventoryManagerComponent->Init(InventoryComponent);
 		
 	}
+}
+
+void AMyInventoryCharacter::EquipItem(EEquipSlot Slot, FName ItemID)
+{
+	UStaticMeshComponent * EquipComponent = GetEquipComponent(Slot);
+	if (EquipComponent)
+	{
+		FInventoryItemInfo * ItemInfoPtr = InventoryManagerComponent->GetItemData(ItemID);
+		if (ItemInfoPtr)
+		{
+			EquipComponent->SetStaticMesh(ItemInfoPtr->Mesh.LoadSynchronous());
+			/*DamageStat += ItemInfoPtr->Damage;
+			ArmorStat += ItemInfoPtr->Armor;
+			IntelligenceStat += ItemInfoPtr->Intelligence;*/
+		}
+	}
+}
+
+void AMyInventoryCharacter::UnequipItem(EEquipSlot Slot, FName ItemID)
+{
+	UStaticMeshComponent * EquipComponent = GetEquipComponent(Slot);
+	if (EquipComponent)
+	{
+		EquipComponent->SetStaticMesh(nullptr);
+		FInventoryItemInfo * ItemInfoPtr = InventoryManagerComponent->GetItemData(ItemID);
+	/*	if (ItemInfoPtr)
+		{
+			DamageStat -= ItemInfoPtr->Damage;
+			ArmorStat -= ItemInfoPtr->Armor;
+			IntelligenceStat -= ItemInfoPtr->Intelligence;
+		}*/
+	}
+}
+
+UStaticMeshComponent * AMyInventoryCharacter::GetEquipComponent(EEquipSlot Slot) const
+{
+	FName EquipTag = "";
+	switch (Slot)
+	{
+	case EEquipSlot::ES_None:
+		break;
+	case EEquipSlot::ES_Head:
+		EquipTag = "Equip_Head";
+		break;
+	case EEquipSlot::ES_Body:
+		EquipTag = "Equip_Body";
+		break;
+	case EEquipSlot::ES_RightHand:
+		EquipTag = "Equip_RightHand";
+		break;
+	case EEquipSlot::ES_LeftHand:
+		EquipTag = "Equip_LeftHand";
+		break;
+	case EEquipSlot::ES_Finger:
+		EquipTag = "Equip_Finger";
+		break;
+	case EEquipSlot::ES_Slot1:
+		EquipTag = "Equip_Slot1";
+		break;
+	case EEquipSlot::ES_Slot2:
+		EquipTag = "Equip_Slot2";
+		break;
+	default:
+		break;
+	}
+	TArray<UActorComponent*> Components = GetComponentsByTag(UStaticMeshComponent::StaticClass(), EquipTag);
+	return Components.Num() > 0 ? Cast<UStaticMeshComponent>(Components[0]) : nullptr;
 }

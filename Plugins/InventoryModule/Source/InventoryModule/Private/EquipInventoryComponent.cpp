@@ -18,7 +18,8 @@ int32 UEquipInventoryComponent::GetMaxItemAmount(int32 SlotIndex, const FInvento
 	{
 		return 0;
 	}
-return 1;
+
+	return 1;
 }
 
 void UEquipInventoryComponent::SetItem(int32 SlotIndex, const FInventorySlotInfo& Item)
