@@ -10,7 +10,7 @@ UInventoryManagerComponent::UInventoryManagerComponent()
 
 void UInventoryManagerComponent::OnItemDropped(UInventoryCellWidget* DraggedFrom, UInventoryCellWidget* DraggedTo)
 {
-
+/*
 	if(IsValid(DraggedFrom) || IsValid(DraggedTo))
 	{
 		const FInventorySlotInfo FromCell = DraggedFrom->GetItem();
@@ -28,159 +28,11 @@ void UInventoryManagerComponent::OnItemDropped(UInventoryCellWidget* DraggedFrom
 		DraggedTo->Clear();
 		DraggedTo->AddItem(FromCell, *FromData);
 	}
-
+*/
 /// Драг дроп для системы двух инвентарей не работает у меня
 
 
-
-
-	/*
-	if(DraggedFrom || DraggedTo)
-	{
-		return;	
-	}
-
-	UInventoryComponent* FromInventory = DraggedFrom->ParentInventoryWidget->RepresentedInventory;
-	UInventoryComponent* ToInventory = DraggedTo->ParentInventoryWidget->RepresentedInventory;
-
-	if (!FromInventory || !ToInventory)
-	{
-		return;
-	}
-	
-	FInventorySlotInfo FromCell = DraggedFrom->GetItem();
-
-	FInventorySlotInfo ToCell = DraggedTo->GetItem();
-
-	if (FromCell.Amount < 1)
-	{
-		return;
-	}
-
-	const FInventoryItemInfo* FromData = GetItemData(FromCell.ItemID);
-
-	const FInventoryItemInfo* ToData = GetItemData(ToCell.ItemID);
-
-	
-
-	if (DraggedTo->IsEmpty())
-	{
-		ToCell = FromCell;
-
-		ToCell.Amount = ToInventory->GetMaxItemAmount(DraggedTo->IndexInInventory, *FromData);
-	}
-
-	if (ToCell.Amount == 0)
-	{
-		return;
-	}
-
-	if (ToCell.Amount == -1)
-	{
-		ToCell.Amount = FromCell.Amount;
-	}
-
-	FromCell.Amount -= ToCell.Amount;
-	
-
-	DraggedFrom->Clear();
-
-	if (FromCell.Amount)
-	{
-		DraggedFrom->AddItem(ToCell, *ToData);
-		FromInventory->SetItem(DraggedFrom->IndexInInventory, FromCell);
-	}
-	else
-	{
-		FromInventory->ClearItem(DraggedFrom->IndexInInventory);
-	}
-		
-		DraggedTo->Clear();
-		DraggedTo->AddItem(FromCell, *FromData);
-		ToInventory->SetItem(DraggedTo->IndexInInventory, ToCell);
-*/
-
-	////////////////////////////////
-	/*
-
-	if (FromData == nullptr || (ToCell.ItemID != NAME_None && ToData == nullptr))
-	{
-		return;
-	}
-	const int32 MaxCount = ToInventory->GetMaxItemAmount(DraggedTo->IndexInInventory, *FromData);
-	if (MaxCount == 0)
-	{
-		return;
-	}
-	else if (MaxCount > 0)
-	{
-		const int ItemsToAdd = FMath::Min(MaxCount, FromCell.Amount);
-		ToCell.Amount = FromCell.Amount - ItemsToAdd;
-		ToCell.ItemID = FromCell.ItemID;
-		ToData = FromData;
-
-		FromCell.Amount = ItemsToAdd;
-	}
-	else if (FromCell.ItemID == ToCell.ItemID)
-	{
-		FromCell.Amount += ToCell.Amount;
-		ToCell.Amount = 0;
-	}
-
-	FromInventory->SetItem(DraggedFrom->IndexInInventory, ToCell);
-	ToInventory->SetItem(DraggedTo->IndexInInventory, FromCell);
-	
-
-	if (!FromCell || !ToCell)
-	{
-		return;
-	}
-	UInventoryComponent * FromInventory =
-	FromCell->ParentInventoryWidget->RepresentedInventory;
-	UInventoryComponent * ToInventory =
-	ToCell->ParentInventoryWidget->RepresentedInventory;
-	if (!FromInventory || !ToInventory)
-	{
-		return;
-	}
-	// split item amount between two inventories
-
-	auto FromSlot{ FromCell->GetItem() };
-	auto ToSlot{ ToCell->GetItem() };
-
-	if (FromSlot.Amount < 1)
-	{
-		return;
-	}
-
-	auto FromInfo{ GetItemData(FromSlot.ItemID) };
-	auto ToInfo{ GetItemData(ToSlot.ItemID) };
-
-
-
-
-
-	FInventorySlotInfo ItemToDrop = ToCell->GetItem();
-	ItemToDrop.Amount = ToInventory->GetMaxItemAmount(ToCell->IndexInInventory, *FromInfo);
-	if (ItemToDrop.Amount == 0)
-	{
-		return;
-	}
-	if (ItemToDrop.Amount == -1)
-	{
-		ItemToDrop.Amount = ToSlot.Amount;
-	}
-	ToSlot.Amount -= ItemToDrop.Amount;
-	FromCell->Clear();
-	FromCell->AddItem(ToSlot, *ToInfo);
-	ToCell->Clear();
-	ToCell->AddItem(FromSlot, *FromInfo);
-	FromInventory->SetItem(FromCell->IndexInInventory, FromSlot);
-	ToInventory->SetItem(ToCell->IndexInInventory, ItemToDrop);
-*/
-	
-/*
-	if (!DraggedFrom || !DraggedTo)
+	if (DraggedFrom == nullptr || DraggedTo == nullptr)
 	{
 		return;
 	}
@@ -188,61 +40,74 @@ void UInventoryManagerComponent::OnItemDropped(UInventoryCellWidget* DraggedFrom
 	UInventoryComponent* FromInventory = DraggedFrom->ParentInventoryWidget->RepresentedInventory;
 	UInventoryComponent* ToInventory = DraggedTo->ParentInventoryWidget->RepresentedInventory;
 
-	if (!FromInventory || !ToInventory)
+	if (FromInventory == nullptr || ToInventory == nullptr)
 	{
 		return;
 	}
 
-	FInventorySlotInfo FromSlot = DraggedFrom->GetItem();
-	FInventorySlotInfo ToSlot = DraggedTo->GetItem();
+	LocalInventoryComponent->SetItem(DraggedFrom->IndexInInventory, DraggedTo->GetItem());
+	LocalInventoryComponent->SetItem(DraggedTo->IndexInInventory, DraggedFrom->GetItem());
 
-	if (FromSlot.Amount < 1)
+	FInventorySlotInfo FromSlotItem = DraggedFrom->GetItem();
+	FInventorySlotInfo ToSlotItem = DraggedTo->GetItem();
+
+	if (FromSlotItem.Amount <= 0)
+	{
+		return;
+	}
+	
+	FInventoryItemInfo* FromInfoItem = GetItemData(FromSlotItem.ItemID);
+	FInventoryItemInfo* ToInfoItem = GetItemData(ToSlotItem.ItemID);
+
+	if (FromInfoItem == nullptr || (ToSlotItem.ItemID != NAME_None && ToInfoItem == nullptr))
 	{
 		return;
 	}
 
-	const FInventoryItemInfo* FromInfo = GetItemData(FromSlot.ItemID);
-	const FInventoryItemInfo* ToInfo = GetItemData(ToSlot.ItemID);
-
-	if (FromInfo == nullptr || (ToSlot.ItemID != NAME_None && ToInfo == nullptr))
-	{
-		return;
-	}
-
-	const int32 MaxCount = ToInventory->GetMaxItemAmount(DraggedTo->IndexInInventory, *FromInfo);
+	int32 MaxCount = ToInventory->GetMaxItemAmount(DraggedTo->IndexInInventory, *FromInfoItem);
 	if (MaxCount == 0)
 	{
 		return;
 	}
+	else if (MaxCount < 0)
+	{
+		if (ToInventory != FromInventory && ToInfoItem != nullptr)
+		{
+			ToSlotItem.bUnequipProccess = true;
+			ToSlotItem.bUnequipAndStack = true;
+
+			FromSlotItem.Amount += ToSlotItem.Amount;
+			FromSlotItem.ItemID = ToSlotItem.ItemID;
+			FromInfoItem = ToInfoItem;
+
+			ToSlotItem.Amount = 0;
+		}
+		else
+		{
+			MaxCount = 1;
+		}
+	}
 	else if (MaxCount > 0)
 	{
-		const int ItemsToAdd = FMath::Min(MaxCount, FromSlot.Amount);
-		ToSlot.Amount = FromSlot.Amount - ItemsToAdd;
-		ToSlot.ItemID = FromSlot.ItemID;
+		int32 ItemsToAdd = FMath::Min(MaxCount, FromSlotItem.Amount);
+		ToSlotItem.Amount = FromSlotItem.Amount - ItemsToAdd;
+		ToSlotItem.ItemID = FromSlotItem.ItemID;
+		ToInfoItem = FromInfoItem;
 
-		ToInfo = FromInfo;
-
-		FromSlot.Amount = ItemsToAdd;
-	}
-	else if (FromSlot.ItemID == ToSlot.ItemID)
-	{
-		FromSlot.Amount += ToSlot.Amount;
-		ToSlot.Amount = 0;
+		FromSlotItem.Amount = ItemsToAdd;
 	}
 
-	FromInventory->SetItem(DraggedFrom->IndexInInventory, ToSlot);
-	ToInventory->SetItem(DraggedTo->IndexInInventory, FromSlot);
+	FromInventory->SetItem(DraggedFrom->IndexInInventory, ToSlotItem);
+	ToInventory->SetItem(DraggedTo->IndexInInventory, FromSlotItem);
 
 	DraggedFrom->Clear();
-
-	if (ToInfo)
+	if (ToInfoItem)
 	{
-		DraggedFrom->AddItem(ToSlot, *ToInfo);
+		DraggedFrom->AddItem(ToSlotItem, *ToInfoItem);
 	}
 
 	DraggedTo->Clear();
-	DraggedTo->AddItem(FromSlot, *FromInfo);
-	*/
+	DraggedTo->AddItem(FromSlotItem, *FromInfoItem);
 }
 
 
@@ -295,6 +160,9 @@ void UInventoryManagerComponent::InitEquipment(UInventoryComponent* InInventoryC
 	EquipInventoryWidget->RepresentedInventory = InInventoryComponent;
 
 	EquipInventoryWidget->AddToViewport();
+
+	
+
 }
 
 FInventoryItemInfo * UInventoryManagerComponent::GetItemData(FName ItemID) const

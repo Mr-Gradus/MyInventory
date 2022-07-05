@@ -18,11 +18,11 @@ public:
 
 	virtual int32 GetMaxItemAmount(int32 SlotIndex, const FInventoryItemInfo& Item) override;
 	virtual void SetItem(int32 SlotIndex, const FInventorySlotInfo& Item) override;
-
+	virtual void ClearItem(int32 SlotIndex) override;
 protected:
 	UPROPERTY(EditAnywhere)
 	TMap<int32, EEquipSlot> EquipSlots;
 
-	UPROPERTY()
-	TScriptInterface<IInventoryCharacterInterface> MyPlayer;
+	//UPROPERTY()
+	//TScriptInterface<IInventoryCharacterInterface> MyPlayer;
 };

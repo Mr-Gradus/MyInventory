@@ -5,6 +5,8 @@
 #include "InventoryComponent.h"
 #include "InventoryItem.h"
 #include <Components/ActorComponent.h>
+
+#include "EquipInventoryComponent.h"
 #include "Engine/DataTable.h"
 #include "InventoryManagerComponent.generated.h"
 
@@ -36,6 +38,9 @@ protected:
 
 	UPROPERTY()
 	UInventoryComponent* LocalInventoryComponent;
+
+	UPROPERTY()
+	UEquipInventoryComponent* LocalEquipComponent;
 
 	UPROPERTY(EditAnywhere)
 	UDataTable* InventoryData;

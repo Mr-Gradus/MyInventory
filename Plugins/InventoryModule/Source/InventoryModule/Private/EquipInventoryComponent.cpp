@@ -24,6 +24,8 @@ int32 UEquipInventoryComponent::GetMaxItemAmount(int32 SlotIndex, const FInvento
 
 void UEquipInventoryComponent::SetItem(int32 SlotIndex, const FInventorySlotInfo& Item)
 {
+	IInventoryCharacterInterface* MyPlayer = Cast<IInventoryCharacterInterface>(GetOwner());
+
 	FInventorySlotInfo * EquippedItem = GetItem(SlotIndex);
 
 	EEquipSlot EquipSlot = EquipSlots.Contains(SlotIndex) ? EquipSlots.FindChecked(SlotIndex) : EEquipSlot::ES_None;
@@ -32,11 +34,33 @@ void UEquipInventoryComponent::SetItem(int32 SlotIndex, const FInventorySlotInfo
 	{
 		MyPlayer->UnequipItem(EquipSlot, EquippedItem->ItemID);
 	}
-
-	Super::SetItem(SlotIndex, Item);
-
-	if (MyPlayer)
+	else
 	{
 		MyPlayer->EquipItem(EquipSlot, Item.ItemID);
 	}
+	//if (MyPlayer)
+	//{
+	//	MyPlayer->EquipItem(EquipSlot, Item.ItemID);
+	//}
 }
+
+void UEquipInventoryComponent::ClearItem(int32 SlotIndex)
+{
+	IInventoryCharacterInterface* MyPlayer = Cast<IInventoryCharacterInterface>(GetOwner());
+	if (!MyPlayer)
+	{
+		Super::ClearItem(SlotIndex);
+		return;
+	}
+
+	const EEquipSlot Slot = EquipSlots.Contains(SlotIndex) ? EquipSlots.FindChecked(SlotIndex) : EEquipSlot::ES_None;
+
+	if (const FInventorySlotInfo* EquipItem = GetItem(SlotIndex))
+	{
+		MyPlayer->UnequipItem(Slot, EquipItem->ItemID);
+	}
+
+	Super::ClearItem(SlotIndex);
+
+}
+

@@ -49,6 +49,11 @@ public:
 	int32 Amount;
 	UPROPERTY(EditAnywhere)
 	EItemType Type;
+
+	UPROPERTY(BlueprintReadOnly, Category = "General")
+	bool bUnequipProccess = false;
+	UPROPERTY(BlueprintReadOnly, Category = "General")
+	bool bUnequipAndStack = false;
 };
 
 

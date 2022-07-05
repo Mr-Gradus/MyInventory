@@ -31,7 +31,7 @@ public:
 	
 	virtual void SetItem(int32 SlotIndex, const FInventorySlotInfo& Item);
 
-	void ClearItem(int32 SlotIndex);
+	virtual void ClearItem(int32 SlotIndex);
 
 	virtual int32 GetMaxItemAmount(int32 SlotIndex, const FInventoryItemInfo& Item);
 	

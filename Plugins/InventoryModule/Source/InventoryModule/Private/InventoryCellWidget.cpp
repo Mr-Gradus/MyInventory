@@ -19,7 +19,7 @@ bool UInventoryCellWidget::AddItem(const FInventorySlotInfo& Item, const FInvent
 	if (ItemImage)
 	{
 		ItemImage->SetBrushFromTexture(ItemInfo.Icon.Get());
-		//ItemImage->SetColorAndOpacity(FLinearColor(1.f, 1.f, 1.f));
+		ItemImage->SetColorAndOpacity(FLinearColor(1.f, 1.f, 1.f));
 	}
 	
 	if (CountText)
@@ -48,7 +48,7 @@ void UInventoryCellWidget::Clear()
 	}
 	if (CountText)
 	{
-		CountText->SetText(FText::FromString("0"));
+		CountText->SetText(FText::FromString(""));
 
 	}
 	bHasItem = false;
