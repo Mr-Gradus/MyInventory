@@ -9,6 +9,6 @@ public class MyInventory : ModuleRules
 		//PrivateDependencyModuleNames.AddRange(new string[] { "InventoryModule" });
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
-        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay", "NavigationSystem", "AIModule", "UMG", "Slate", "SlateCore", "InventoryModule" });
+        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay", "NavigationSystem", "AIModule", "UMG", "Slate", "SlateCore", "InventoryModule", "MediaPlayer" });
     }
 }
