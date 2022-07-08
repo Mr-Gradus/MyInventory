@@ -21,6 +21,14 @@
 		{
 			"Name": "InventoryModule",
 			"Enabled": true
+		},
+		{
+			"Name": "MediaPlayer",
+			"Enabled": false
+		},
+		{
+			"Name": "MyQuestModule",
+			"Enabled": true
 		}
 	]
 }

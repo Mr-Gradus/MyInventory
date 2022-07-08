@@ -4,10 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "EquipInventoryComponent.h"
+#include "InteractionComponent.h"
 #include "InventoryComponent.h"
 #include "InventoryCellWidget.h"
 #include "GameFramework/Character.h"
 #include "InventoryManagerComponent.h"
+#include "QuestListComponent.h"
 #include "Engine/DataTable.h"
 #include "MyInventoryCharacter.generated.h"
 
@@ -16,7 +18,7 @@ class UInventoryComponent;
 class UInventoryManagerComponent;
 
 UCLASS(Blueprintable)
-class AMyInventoryCharacter : public ACharacter
+class AMyInventoryCharacter : public ACharacter, public IInventoryCharacterInterface
 {
 	GENERATED_BODY()
 
@@ -49,7 +51,12 @@ public:
 
 	UPROPERTY(EditDefaultsOnly)
 	UEquipInventoryComponent* EquipmentInventoryComponent;
-	
+
+	UPROPERTY(EditDefaultsOnly)
+	UInteractionComponent* InteractionComponent;
+
+	UPROPERTY(EditDefaultsOnly)
+	UQuestListComponent* QuestListComponent;
 private:
 	/** Top down camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))

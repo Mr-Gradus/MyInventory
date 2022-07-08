@@ -25,7 +25,7 @@ public class MyQuestModule : ModuleRules
 		PublicDependencyModuleNames.AddRange(
 			new string[]
 			{
-				"Core",
+				"Core"
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
@@ -36,8 +36,10 @@ public class MyQuestModule : ModuleRules
 			{
 				"CoreUObject",
 				"Engine",
+				"InputCore",
 				"Slate",
 				"SlateCore",
+				"UMG"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

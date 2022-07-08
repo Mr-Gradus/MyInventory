@@ -63,7 +63,7 @@ void UInventoryManagerComponent::OnItemDropped(UInventoryCellWidget* DraggedFrom
 	{
 		return;
 	}
-
+/*
 	int32 MaxCount = ToInventory->GetMaxItemAmount(DraggedTo->IndexInInventory, *FromInfoItem);
 	if (MaxCount == 0)
 	{
@@ -96,7 +96,7 @@ void UInventoryManagerComponent::OnItemDropped(UInventoryCellWidget* DraggedFrom
 
 		FromSlotItem.Amount = ItemsToAdd;
 	}
-
+*/
 	FromInventory->SetItem(DraggedFrom->IndexInInventory, ToSlotItem);
 	ToInventory->SetItem(DraggedTo->IndexInInventory, FromSlotItem);
 

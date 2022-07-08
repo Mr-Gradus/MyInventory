@@ -6,6 +6,7 @@ public class MyInventory : ModuleRules
 {
 	public MyInventory(ReadOnlyTargetRules Target) : base(Target)
 	{
+		PrivateDependencyModuleNames.AddRange(new string[] { "MyQuestModule" });
 		//PrivateDependencyModuleNames.AddRange(new string[] { "InventoryModule" });
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 

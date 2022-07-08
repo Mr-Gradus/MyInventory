@@ -23,6 +23,4 @@ protected:
 	UPROPERTY(EditAnywhere)
 	TMap<int32, EEquipSlot> EquipSlots;
 
-	//UPROPERTY()
-	//TScriptInterface<IInventoryCharacterInterface> MyPlayer;
 };

@@ -28,7 +28,7 @@ void UEquipInventoryComponent::SetItem(int32 SlotIndex, const FInventorySlotInfo
 
 	FInventorySlotInfo * EquippedItem = GetItem(SlotIndex);
 
-	EEquipSlot EquipSlot = EquipSlots.Contains(SlotIndex) ? EquipSlots.FindChecked(SlotIndex) : EEquipSlot::ES_None;
+	EEquipSlot EquipSlot = EquipSlots.Contains(SlotIndex) ? EquipSlots.FindChecked(SlotIndex) : EEquipSlot::ES_Body;
 
 	if (EquippedItem && MyPlayer)
 	{
