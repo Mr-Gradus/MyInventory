@@ -33,6 +33,5 @@ protected:
 	TSubclassOf<UObjectiveWidget> ObjectiveWidgetClass;
 
 public:
-	void Init(AQuest *Quest);
 	
 };

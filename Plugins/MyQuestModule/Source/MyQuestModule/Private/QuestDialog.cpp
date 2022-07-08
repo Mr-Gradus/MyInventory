@@ -1,5 +1,4 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
-
+﻿
 #include "QuestDialog.h"
 #include "Quest.h"
 #include "QuestDescription.h"
@@ -10,7 +9,6 @@
 
 #include <tuple>
 
-// --------------------------------------------------------------------------------------
 void UQuestDialog::NativeConstruct()
 {
 	Super::NativeConstruct();
@@ -31,30 +29,18 @@ void UQuestDialog::NativeConstruct()
 
 }
 
-// --------------------------------------------------------------------------------------
-void UQuestDialog::Init(AQuest* Quest)
-{
-	if (QuestDescription)
-	{
-		QuestDescription->Init(Quest);
-	}
 
-}
-
-// --------------------------------------------------------------------------------------
 void UQuestDialog::OnAccepted()
 {
 	HideDialog();
 	std::ignore = OnQuestAccepted.ExecuteIfBound();
 }
 
-// --------------------------------------------------------------------------------------
 void UQuestDialog::OnRejected()
 {
 	HideDialog();
 }
 
-// --------------------------------------------------------------------------------------
 void UQuestDialog::HideDialog()
 {
 	auto PlayerController {UGameplayStatics::GetPlayerController(GetWorld(), 0)};

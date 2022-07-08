@@ -52,11 +52,7 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	UEquipInventoryComponent* EquipmentInventoryComponent;
 
-	UPROPERTY(EditDefaultsOnly)
-	UInteractionComponent* InteractionComponent;
-
-	UPROPERTY(EditDefaultsOnly)
-	UQuestListComponent* QuestListComponent;
+	
 private:
 	/** Top down camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))

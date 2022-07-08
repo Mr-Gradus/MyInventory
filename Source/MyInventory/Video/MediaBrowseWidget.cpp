@@ -54,7 +54,7 @@ void UMediaBrowseWidget::OnBrowseButtonReleased()
 
 		DesktopPlatform->OpenFileDialog(FSlateApplication::Get().FindBestParentWindowHandleForDialogs(nullptr),
 										"Select Content",
-										FPaths::GameSourceDir()+TEXT("/Plugins/MediaPlayer/Content"),
+										FPaths::GameSourceDir()+TEXT("/Content/VideoPlayer"),
 										"",
 										FileTypes,
 										0,

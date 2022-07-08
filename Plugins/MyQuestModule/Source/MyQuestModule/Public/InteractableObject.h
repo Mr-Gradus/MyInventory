@@ -4,7 +4,7 @@
 #include "UObject/Interface.h"
 #include "InteractableObject.generated.h"
 
-class AInteractableActor;
+//class AInteractableActor;
 UINTERFACE(MinimalAPI)
 class UInteractableObject : public UInterface
 {
@@ -22,7 +22,6 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void Interact(AActor* ActorInteractedWithObject);
-	
 	UFUNCTION()
 	virtual void Interact_Implementation(AActor* ActorInteractedWithObject) {}
 
@@ -36,6 +35,7 @@ public:
 	}
 	FOnInteractionFinished OnInteractionFinished;
 };
+
 
 UCLASS()
 class MYQUESTMODULE_API AInteractableActor : public AActor
