@@ -39,7 +39,8 @@ public class MyQuestModule : ModuleRules
 				"InputCore",
 				"Slate",
 				"SlateCore",
-				"UMG"
+				"UMG",
+				"DesktopPlatform"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

@@ -4,7 +4,6 @@
 #include "UObject/Interface.h"
 #include "InteractableObject.generated.h"
 
-//class AInteractableActor;
 UINTERFACE(MinimalAPI)
 class UInteractableObject : public UInterface
 {
@@ -38,7 +37,7 @@ public:
 
 
 UCLASS()
-class MYQUESTMODULE_API AInteractableActor : public AActor
+class MYQUESTMODULE_API AInteractableActor : public AActor, public IInteractableObject
 {
 	GENERATED_BODY()
 	

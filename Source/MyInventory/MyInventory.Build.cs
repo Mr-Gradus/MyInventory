@@ -6,10 +6,10 @@ public class MyInventory : ModuleRules
 {
 	public MyInventory(ReadOnlyTargetRules Target) : base(Target)
 	{
-		PrivateDependencyModuleNames.AddRange(new string[] { "MyQuestModule" });
+		//PrivateDependencyModuleNames.AddRange(new string[] { "MyQuestModule" });
 		//PrivateDependencyModuleNames.AddRange(new string[] { "InventoryModule" });
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
-        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay", "NavigationSystem", "AIModule", "UMG", "Slate", "SlateCore", "InventoryModule", "MediaAssets", "DesktopPlatform"  });
+        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay", "NavigationSystem", "AIModule", "UMG", "Slate", "SlateCore", "InventoryModule","MyQuestModule", "MediaAssets", "DesktopPlatform"  });
     }
 }
