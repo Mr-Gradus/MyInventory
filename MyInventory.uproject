@@ -29,6 +29,10 @@
 		{
 			"Name": "MyQuestModule",
 			"Enabled": true
+		},
+		{
+			"Name": "BlueprintRetarget",
+			"Enabled": false
 		}
 	]
 }
