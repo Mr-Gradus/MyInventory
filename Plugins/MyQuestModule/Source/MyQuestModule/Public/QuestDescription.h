@@ -1,6 +1,4 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
-
-#pragma once
+﻿#pragma once
 
 #include <CoreMinimal.h>
 #include <Blueprint/UserWidget.h>
@@ -11,27 +9,24 @@ class UObjectiveWidget;
 class UTextBlock;
 class UScrollBox;
 
-/**
- * 
- */
 UCLASS()
 class MYQUESTMODULE_API UQuestDescription : public UUserWidget
 {
 	GENERATED_BODY()
 
+public:
+	void Init(AQuest* Quest);
+
 protected:
-	UPROPERTY( meta = (BindWidget) )
+	UPROPERTY( meta = (BindWidgetOptional) )
 	UTextBlock* NameText;
 
-	UPROPERTY( meta = (BindWidget) )
+	UPROPERTY( meta = (BindWidgetOptional) )
 	UTextBlock* DescriptionText;
 
-	UPROPERTY( meta = (BindWidget) )
+	UPROPERTY( meta = (BindWidgetOptional) )
 	UScrollBox* ObjectivesList;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<UObjectiveWidget> ObjectiveWidgetClass;
-
-public:
-	
 };

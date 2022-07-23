@@ -20,7 +20,7 @@ class MYQUESTMODULE_API UObjectiveWidget : public UUserWidget
 
 protected:
 	UPROPERTY( meta = (BindWidget) )
-	UCheckBox* CompletedCheck;
+	UCheckBox* ComplitedCheck;
 
 	UPROPERTY( meta = (BindWidget) )
 	UTextBlock* DescriptionText;

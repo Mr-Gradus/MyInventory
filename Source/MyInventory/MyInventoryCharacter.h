@@ -4,11 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "EquipInventoryComponent.h"
+#include "InteractableObject.h"
 #include "InteractionComponent.h"
 #include "InventoryComponent.h"
 #include "InventoryCellWidget.h"
 #include "GameFramework/Character.h"
 #include "InventoryManagerComponent.h"
+#include "QuestDialog.h"
 #include "QuestListComponent.h"
 #include "Engine/DataTable.h"
 #include "MyInventoryCharacter.generated.h"
@@ -18,7 +20,7 @@ class UInventoryComponent;
 class UInventoryManagerComponent;
 
 UCLASS(Blueprintable)
-class AMyInventoryCharacter : public ACharacter, public IInventoryCharacterInterface
+class AMyInventoryCharacter : public ACharacter, public IInventoryCharacterInterface, public IInteractableObject
 {
 	GENERATED_BODY()
 
@@ -30,6 +32,8 @@ public:
 
 	virtual void BeginPlay() override;
 
+	virtual void Interact_Implementation(AActor* ActorInteractedWithObject) override;
+	
 	UFUNCTION(BlueprintCallable)
 	void ChangeClassCharacter(UDataTable* ClassDataTable) const;
 	void EquipItem(EEquipSlot Slot, FName ItemID);
@@ -65,5 +69,9 @@ private:
 	/** A decal that projects to the cursor location. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UDecalComponent* CursorToWorld;
+
+protected:
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UQuestDialog> QuestDialogClass;
 };
 

@@ -2,12 +2,18 @@
 #include "QuestDialog.h"
 #include "Quest.h"
 #include "QuestDescription.h"
-
 #include <Components/Button.h>
 #include <Kismet/GameplayStatics.h>
 #include <Blueprint/WidgetBlueprintLibrary.h>
 
-#include <tuple>
+void UQuestDialog::Init(AQuest* Quest) const
+{
+	if (Description)
+    {
+		Description->Init(Quest);
+    }
+
+}
 
 void UQuestDialog::NativeConstruct()
 {
@@ -15,40 +21,42 @@ void UQuestDialog::NativeConstruct()
 
 	if (AcceptButton)
 	{
-		AcceptButton->OnReleased.AddDynamic(this, &ThisClass::OnAccepted);
+		AcceptButton->OnReleased.AddDynamic(this, &UQuestDialog::AcceptQuest);
 	}
 
 	if (RejectButton)
 	{
-		RejectButton->OnReleased.AddDynamic(this, &ThisClass::OnRejected);
+		RejectButton->OnReleased.AddDynamic(this, &UQuestDialog::RejectQuest);
 	}
 
-	auto PlayerController {UGameplayStatics::GetPlayerController(GetWorld(), 0)};
-	UWidgetBlueprintLibrary::SetInputMode_UIOnlyEx(PlayerController, this);
-	PlayerController->SetShowMouseCursor(true);
+	APlayerController * PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+	UWidgetBlueprintLibrary::SetInputMode_UIOnly(PC);
+	PC->bShowMouseCursor = true;
 
 }
 
 
-void UQuestDialog::OnAccepted()
+void UQuestDialog::AcceptQuest()
 {
 	HideDialog();
-	std::ignore = OnQuestAccepted.ExecuteIfBound();
+	OnQuestAccepted.ExecuteIfBound();
 }
 
-void UQuestDialog::OnRejected()
+void UQuestDialog::RejectQuest()
 {
 	HideDialog();
 }
 
 void UQuestDialog::HideDialog()
 {
-	auto PlayerController {UGameplayStatics::GetPlayerController(GetWorld(), 0)};
-	UWidgetBlueprintLibrary::SetInputMode_GameOnly(PlayerController);
-	PlayerController->SetShowMouseCursor(true);
 	RemoveFromViewport();
-	std::ignore = OnDialogClosed.ExecuteIfBound();
 
+	APlayerController * PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+
+	UWidgetBlueprintLibrary::SetInputMode_GameOnly(PC);
+	PC->bShowMouseCursor = false;
+
+	OnQuestQuited.ExecuteIfBound();
 }
 
 

@@ -26,7 +26,12 @@ void UQuestListComponent::BeginPlay()
 
 void UQuestListComponent::AddQuest(AQuest* Quest)
 {
-	/*if (Quest)
+	if (Quest == nullptr)
+	{
+		return;
+	}	
+
+	if (Quest)
 	{
 		AcceptedQuests.AddUnique(Quest);
 		Quest->TakeQuest(GetOwner());
@@ -39,9 +44,8 @@ void UQuestListComponent::AddQuest(AQuest* Quest)
 					OnActiveQuestChanged.Broadcast(Quest);
 				}
 			}
-         });
-         }
-*/
+		 });
+	}
 }
 
 void UQuestListComponent::SetActiveQuest(AQuest* Quest)

@@ -1,6 +1,4 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
-
-#pragma once
+﻿#pragma once
 
 #include <CoreMinimal.h>
 #include <Blueprint/UserWidget.h>
@@ -10,9 +8,6 @@ class AQuest;
 class UQuestDescription;
 class UButton;
 
-/**
- * 
- */
 UCLASS()
 class MYQUESTMODULE_API UQuestDialog : public UUserWidget
 {
@@ -21,29 +16,29 @@ class MYQUESTMODULE_API UQuestDialog : public UUserWidget
 public:
 	FSimpleDelegate OnQuestAccepted;
 	
-	FSimpleDelegate OnDialogClosed;
+	FSimpleDelegate OnQuestQuited;
 
 protected:
-	UPROPERTY( meta = (BindWidget) )
-	UQuestDescription* QuestDescription;
+	UPROPERTY( meta = (BindWidgetOptional))
+	UQuestDescription* Description;
 	
-	UPROPERTY( meta = (BindWidget) )
+	UPROPERTY( meta = (BindWidgetOptional))
 	UButton* AcceptButton;
 	
-	UPROPERTY( meta = (BindWidget) )
+	UPROPERTY( meta = (BindWidgetOptional))
 	UButton* RejectButton;
 	
 public:
-	void Init(AQuest* Quest);
+	void Init(AQuest* Quest) const;
 
 	virtual void NativeConstruct() override;
 
 protected:
 	UFUNCTION()
-	void OnAccepted();
+	void AcceptQuest();
 
 	UFUNCTION()
-	void OnRejected();
+	void RejectQuest();
 
 	void HideDialog();
 	
