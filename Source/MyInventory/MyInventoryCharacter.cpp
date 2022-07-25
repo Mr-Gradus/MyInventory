@@ -12,6 +12,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "QuestListComponent.h"
+#include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Materials/Material.h"
 #include "Engine/World.h"
 #include "Kismet/GameplayStatics.h"
@@ -172,9 +173,8 @@ void AMyInventoryCharacter::ToggleQuestListVisibility()
     	
 		QuestList = nullptr;
     	
-		//  UWidgetBlueprintLibrary::SetInputMode_GameOnly(PC);
-		// 
-		// PC->bShowMouseCursor = false;
+		UWidgetBlueprintLibrary::SetInputMode_GameOnly(PC);
+		PC->bShowMouseCursor = false;
 	}
 	else
 	{
@@ -182,13 +182,12 @@ void AMyInventoryCharacter::ToggleQuestListVisibility()
 		{
 			QuestList = CreateWidget<UQuestList>(GetWorld(), QuestListClass);
     		
-			QuestList->Init(QuestList);
+			QuestList->Init(QuestListComponent);
     		
 			QuestList->AddToViewport();
     		
-			// UWidgetBlueprintLibrary::SetInputMode_GameAndUI(PC);
-			//
-			// PC->bShowMouseCursor = true;
+			UWidgetBlueprintLibrary::SetInputMode_GameAndUIEx(PC);
+			PC->bShowMouseCursor = true;
 		}
 	}
 }

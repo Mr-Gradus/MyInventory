@@ -6,13 +6,13 @@ void UQuestList::Init(UQuestListComponent* QuestList)
     {
 	    for (AQuest* Quest : QuestList->GetQuests())
 	    {
-			UScrollBox* Scroll = Quest->IsStoryQuest() ?  StoryQuestsList : SideQuestsList;
+			UScrollBox* Scroll = Quest->bIsStoryQuest ?  StoryQuestsList : SideQuestsList;
 	    	
 		    if (Scroll)
 		    {
 			    UQuestListEntry* QuestEntry =  CreateWidget<UQuestListEntry>(this, QuestEntryClass);
 		    	
-			    QuestEntry->SetQuestText(Quest->GetQuestName());
+			    QuestEntry->SetQuestText(Quest->Name);
 		    	
 			    QuestEntry->OnQuestChosen.BindUObject(QuestList, &UQuestListComponent::SetActiveQuest, Quest);
 		    	

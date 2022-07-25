@@ -51,7 +51,7 @@ void UQuestDialog::HideDialog()
 {
 	RemoveFromViewport();
 
-	APlayerController * PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+	APlayerController* PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 
 	UWidgetBlueprintLibrary::SetInputMode_GameOnly(PC);
 	PC->bShowMouseCursor = false;

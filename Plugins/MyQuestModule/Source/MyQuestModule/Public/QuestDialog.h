@@ -2,9 +2,10 @@
 
 #include <CoreMinimal.h>
 #include <Blueprint/UserWidget.h>
+
+#include "Quest.h"
 #include "QuestDialog.generated.h"
 
-class AQuest;
 class UQuestDescription;
 class UButton;
 

@@ -8,7 +8,7 @@
 #include "QuestListEntry.generated.h"
 
 UCLASS()
-class QUESTSYSTEM_API UQuestListEntry : public UUserWidget
+class MYQUESTMODULE_API UQuestListEntry : public UUserWidget
 {
 	GENERATED_BODY()
 	

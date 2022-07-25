@@ -9,7 +9,7 @@
 #include "QuestList.generated.h"
 
 UCLASS()
-class QUESTSYSTEM_API UQuestList : public UUserWidget
+class MYQUESTMODULE_API UQuestList : public UUserWidget
 {
 	GENERATED_BODY()
 
@@ -17,6 +17,7 @@ public:
 
 	void Init(UQuestListComponent* QuestList);
 
+protected:
 	UPROPERTY(meta = (BindWidgetOptional))
 	UScrollBox* StoryQuestsList;
 	
