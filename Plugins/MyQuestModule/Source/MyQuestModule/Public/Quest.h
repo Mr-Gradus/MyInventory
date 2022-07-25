@@ -40,6 +40,8 @@ public:
 	UFUNCTION(BlueprintCallable, CallInEditor)
 	void AddInteractObjective();
 
+	bool IsCompleted();
+
 	UPROPERTY(EditAnywhere)
 	FText Name;
 	
@@ -56,7 +58,9 @@ public:
 	bool bKeepObjectivesOrder = true;
 	
 	UPROPERTY(EditAnywhere)
-	bool bIsTaken;
+	bool bIsTaken = false;
+
+	bool QuestStatus = false;	
 
 	UPROPERTY(EditAnywhere)
 	AQuest* PrerequisitedQuest;

@@ -42,4 +42,5 @@ public:
 
 	UFUNCTION()
 	void OnMediaOpened(FString Path);
+	void KeepAspectRatio(const FVector2D& MediaSize);
 };

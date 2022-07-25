@@ -5,13 +5,12 @@
 #include "CoreMinimal.h"
 #include "EquipInventoryComponent.h"
 #include "InteractableObject.h"
-#include "InteractionComponent.h"
 #include "InventoryComponent.h"
 #include "InventoryCellWidget.h"
 #include "GameFramework/Character.h"
 #include "InventoryManagerComponent.h"
 #include "QuestDialog.h"
-#include "QuestListComponent.h"
+#include "QuestList.h"
 #include "Engine/DataTable.h"
 #include "MyInventoryCharacter.generated.h"
 
@@ -35,7 +34,11 @@ public:
 	virtual void Interact_Implementation(AActor* ActorInteractedWithObject) override;
 	
 	UFUNCTION(BlueprintCallable)
+	void ToggleQuestListVisibility();
+		
+	UFUNCTION(BlueprintCallable)
 	void ChangeClassCharacter(UDataTable* ClassDataTable) const;
+	
 	void EquipItem(EEquipSlot Slot, FName ItemID);
 	void UnequipItem(EEquipSlot Slot, FName ItemID);
 	UStaticMeshComponent* GetEquipComponent(EEquipSlot Slot) const;
@@ -56,6 +59,14 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	UEquipInventoryComponent* EquipmentInventoryComponent;
 
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category ="Components")
+	UQuestListComponent* QuestList;
+	
+	UPROPERTY()
+	UQuestList* QuestList;
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<UQuestList> QuestListClass;
 	
 private:
 	/** Top down camera */

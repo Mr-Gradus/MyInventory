@@ -74,3 +74,8 @@ void AQuest::AddInteractObjective()
 {
 	Objectives.Add(NewObject<UInteractionObjective>(this));
 }
+
+bool AQuest::IsCompleted()
+{
+	return QuestStatus;
+}

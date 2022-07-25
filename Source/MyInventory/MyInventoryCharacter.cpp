@@ -11,8 +11,10 @@
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "HeadMountedDisplayFunctionLibrary.h"
+#include "QuestListComponent.h"
 #include "Materials/Material.h"
 #include "Engine/World.h"
+#include "Kismet/GameplayStatics.h"
 
 AMyInventoryCharacter::AMyInventoryCharacter()
 {
@@ -131,10 +133,10 @@ void AMyInventoryCharacter::Interact_Implementation(AActor* ActorInteractedWithO
 			{
 				if (AQuest * Quest = Cast<AQuest>(Actor))
 				{
-					if (Quest->IsAlreadyTaken() || (Quest->GetPrerquisedQuest() && !Quest->GetPrerquisedQuest()->IsCompleted()))
-					{
-						continue;
-					}
+					//if (Quest->bIsTaken() || (Quest->PrerequisitedQuest && !Quest->PrerequisitedQuest->IsCompleted()))
+					//{
+					//	continue;
+					//}
 					if (QuestDialogClass)
 					{
 						UQuestDialog * QuestDialog = CreateWidget<UQuestDialog>(GetWorld(), QuestDialogClass);
@@ -158,6 +160,37 @@ void AMyInventoryCharacter::Interact_Implementation(AActor* ActorInteractedWithO
             }
         }
     }
+}
+
+void AMyInventoryCharacter::ToggleQuestListVisibility()
+{
+	APlayerController* PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+	
+	if (QuestList)
+	{
+		QuestList->RemoveFromParent();
+    	
+		QuestList = nullptr;
+    	
+		//  UWidgetBlueprintLibrary::SetInputMode_GameOnly(PC);
+		// 
+		// PC->bShowMouseCursor = false;
+	}
+	else
+	{
+		if (QuestListClass)
+		{
+			QuestList = CreateWidget<UQuestList>(GetWorld(), QuestListClass);
+    		
+			QuestList->Init(QuestList);
+    		
+			QuestList->AddToViewport();
+    		
+			// UWidgetBlueprintLibrary::SetInputMode_GameAndUI(PC);
+			//
+			// PC->bShowMouseCursor = true;
+		}
+	}
 }
 
 void AMyInventoryCharacter::ChangeClassCharacter(UDataTable* ClassDataTable) const

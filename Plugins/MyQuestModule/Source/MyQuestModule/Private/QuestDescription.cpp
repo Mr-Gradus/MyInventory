@@ -12,11 +12,11 @@ void UQuestDescription::Init(AQuest * Quest)
 	{
 		if (NameText)
 		{
-			NameText->SetText(Quest->GetName());
+			//NameText->SetText(Quest->GetName());
 		}
 		if (DescriptionText)
 		{
-			DescriptionText->SetText(Quest->GetDescription());
+		//	DescriptionText->SetText(Quest->GetDescription());
 		}
 		if (ObjectiveWidgetClass && ObjectivesList)
 		{

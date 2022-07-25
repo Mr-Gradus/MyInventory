@@ -5,7 +5,6 @@
 #include "Runtime/Engine/Classes/Components/DecalComponent.h"
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "MyInventoryCharacter.h"
-#include "Engine/World.h"
 
 AMyInventoryPlayerController::AMyInventoryPlayerController()
 {

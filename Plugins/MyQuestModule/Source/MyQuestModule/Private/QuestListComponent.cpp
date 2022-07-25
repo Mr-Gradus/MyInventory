@@ -31,20 +31,24 @@ void UQuestListComponent::AddQuest(AQuest* Quest)
 		return;
 	}	
 
+	if (ActiveQuest == nullptr || ActiveQuest->IsCompleted())
+	{
+		ActiveQuest = Quest;
+		
+		OnActiveQuestChanged.Broadcast(ActiveQuest);		
+	}
+	
 	if (Quest)
 	{
 		AcceptedQuests.AddUnique(Quest);
 		Quest->TakeQuest(GetOwner());
-		Quest->OnQuestStatusUpdated.AddLambda([this](AQuest* Quest)
-		{
-			if (ActiveQuest == Quest)
-			{
-				if (OnActiveQuestChanged.IsBound())
-				{
-					OnActiveQuestChanged.Broadcast(Quest);
-				}
-			}
-		 });
+	//	Quest->OnQuestStatusUpdated.AddLambda([this](AQuest* ChangedQuest)
+		//{
+			//if (ActiveQuest == ChangedQuest && OnActiveQuestChanged.IsBound())
+		//	{
+				//OnActiveQuestChanged.Broadcast(ChangedQuest);
+			//}
+		// });   
 	}
 }
 

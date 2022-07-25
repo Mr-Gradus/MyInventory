@@ -19,7 +19,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<UObjectiveWidget> ObjectiveWidgetClass;
 
-	UPROPERTY(meta = (BindWidgetOptional))
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidgetOptional))
 	UVerticalBox* ObjectivesList;
 
 

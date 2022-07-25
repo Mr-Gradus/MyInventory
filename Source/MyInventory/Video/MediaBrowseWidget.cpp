@@ -100,7 +100,22 @@ void UMediaBrowseWidget::OnMediaOpened(FString Path)
 {
 	if (!MediaPlayer || !RenderImage) return;
 
-	const auto ContentDimensions = MediaPlayer->GetVideoTrackDimensions(INDEX_NONE, INDEX_NONE);
-	const auto ContentSize = FVector2D(ContentDimensions.X, ContentDimensions.Y);
-	RenderImage->SetBrushSize(ContentSize);
+	const FVector2D MediaSize {MediaPlayer->GetVideoTrackDimensions(INDEX_NONE, INDEX_NONE)};
+	KeepAspectRatio(MediaSize);
+}
+
+void UMediaBrowseWidget::KeepAspectRatio(const FVector2D& MediaSize)
+{
+	const FVector2D ImageSize {RenderImage->GetCachedGeometry().GetLocalSize()};
+
+	const float	MediaAspect {MediaSize.X / MediaSize.Y};
+
+	const float ImageAspect {ImageSize.X / ImageSize.Y};
+
+	const FVector2D ScaleSize {ImageSize.Y * MediaAspect, ImageSize.Y};
+
+	const FVector2D ScaleFactor {MediaAspect > ImageAspect ? FVector2D{1.f, FMath::Min(1.f, ImageSize.X / ScaleSize.X) } :
+		FVector2D{FMath::Min(1.f, ScaleSize.X / ImageSize.X), 1.f} };
+
+	RenderImage->SetRenderScale(ScaleFactor);
 }

@@ -30,7 +30,7 @@ void UQuestDialog::NativeConstruct()
 	}
 
 	APlayerController * PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
-	UWidgetBlueprintLibrary::SetInputMode_UIOnly(PC);
+	UWidgetBlueprintLibrary::SetInputMode_UIOnlyEx(PC);
 	PC->bShowMouseCursor = true;
 
 }
