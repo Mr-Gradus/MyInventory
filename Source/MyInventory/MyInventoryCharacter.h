@@ -7,6 +7,7 @@
 #include "InteractableObject.h"
 #include "InventoryComponent.h"
 #include "InventoryCellWidget.h"
+#include "InventoryCharacterInterface.h"
 #include "GameFramework/Character.h"
 #include "InventoryManagerComponent.h"
 #include "QuestDialog.h"
@@ -54,7 +55,7 @@ public:
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns CursorToWorld subobject **/
-	FORCEINLINE class UDecalComponent* GetCursorToWorld() { return CursorToWorld; }
+	FORCEINLINE class UDecalComponent* GetCursorToWorld() const { return CursorToWorld; }
 
 	UPROPERTY(EditDefaultsOnly)
 	UInventoryComponent* InventoryComponent;

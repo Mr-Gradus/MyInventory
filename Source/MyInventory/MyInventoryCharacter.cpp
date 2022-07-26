@@ -103,10 +103,12 @@ void AMyInventoryCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
+/*
 	if(InventoryManagerComponent && EquipmentInventoryComponent)
 	{
 		InventoryManagerComponent->InitEquipment(EquipmentInventoryComponent);
 	}
+*/	
 }
 
 void AMyInventoryCharacter::Interact_Implementation(AActor* ActorInteractedWithObject)
@@ -135,7 +137,7 @@ void AMyInventoryCharacter::Interact_Implementation(AActor* ActorInteractedWithO
 					{
 						UQuestDialog * QuestDialog = CreateWidget<UQuestDialog>(GetWorld(), QuestDialogClass);
 						QuestDialog->Init(Quest);
-						QuestDialog->OnQuestAccepted.BindUObject(ActorQuestList, &UQuestListComponent::AddQuest, Quest);
+						QuestDialog->OnQuestAccepted.AddUObject(ActorQuestList, &UQuestListComponent::AddQuest, Quest);
 						
                         QuestDialog->OnQuestQuited.BindLambda([this, ActorInteractedWithObject]()
                         {

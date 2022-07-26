@@ -6,7 +6,11 @@
 #include "GameFramework/Actor.h"
 #include "Quest.generated.h"
 
-DECLARE_MULTICAST_DELEGATE_OneParam(FOnQuestStatusUpdated, AActor*)
+class AQuest;
+
+DECLARE_MULTICAST_DELEGATE_OneParam(FOnQuestStatusUpdated, AQuest*);
+
+DECLARE_MULTICAST_DELEGATE(FOnNotifyStatus);
 
 UCLASS()
 class MYQUESTMODULE_API AQuest : public AActor
@@ -19,6 +23,8 @@ public:
 	void TakeQuest(AActor* Character);
 
 	FOnQuestStatusUpdated OnQuestStatusUpdated;
+	FOnNotifyStatus OnNotifyStatus;
+
 	
 	UFUNCTION(BlueprintPure)
 	const TArray<UObjective*>& GetObjectives() const { return Objectives; }
@@ -39,6 +45,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, CallInEditor)
 	void AddInteractObjective();
+
+	UFUNCTION()
+	TArray<AActor*> GetObjectiveComponents();
 
 	bool IsCompleted();
 

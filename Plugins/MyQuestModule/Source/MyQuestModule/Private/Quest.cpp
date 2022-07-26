@@ -79,3 +79,14 @@ bool AQuest::IsCompleted()
 {
 	return QuestStatus;
 }
+
+TArray<AActor*> AQuest::GetObjectiveComponents()
+{
+	TArray<AActor*> ObjCollection;
+	for (UObjective* ThisObjective : Objectives)
+	{
+		ObjCollection.Add(ThisObjective->GetInteractiveComponent());
+	}
+
+	return ObjCollection;
+}

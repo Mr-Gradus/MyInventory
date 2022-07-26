@@ -2,12 +2,13 @@
 
 #include <CoreMinimal.h>
 #include <Blueprint/UserWidget.h>
-
 #include "Quest.h"
 #include "QuestDialog.generated.h"
 
 class UQuestDescription;
 class UButton;
+
+DECLARE_MULTICAST_DELEGATE(FOnQuestAccepted);
 
 UCLASS()
 class MYQUESTMODULE_API UQuestDialog : public UUserWidget
@@ -15,7 +16,7 @@ class MYQUESTMODULE_API UQuestDialog : public UUserWidget
 	GENERATED_BODY()
 
 public:
-	FSimpleDelegate OnQuestAccepted;
+	FOnQuestAccepted OnQuestAccepted;
 	
 	FSimpleDelegate OnQuestQuited;
 
@@ -27,7 +28,7 @@ protected:
 	UButton* AcceptButton;
 	
 	UPROPERTY( meta = (BindWidgetOptional))
-	UButton* RejectButton;
+	UButton* CancelButton;
 	
 public:
 	void Init(AQuest* Quest) const;
@@ -39,7 +40,7 @@ protected:
 	void AcceptQuest();
 
 	UFUNCTION()
-	void RejectQuest();
+	void CancelQuest();
 
 	void HideDialog();
 	

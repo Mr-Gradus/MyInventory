@@ -5,10 +5,10 @@
 
 bool UInventoryCellWidget::AddItem(const FInventorySlotInfo& Item, const FInventoryItemInfo& ItemInfo)
 {
-	//if (bHasItem)
-	//{
-	//	return false;
-	//}
+	if (bHasItem)
+	{
+		return false;
+	}
 
 	if (Item.Amount == 0)
 	{

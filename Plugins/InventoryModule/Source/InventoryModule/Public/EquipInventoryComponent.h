@@ -2,7 +2,6 @@
 
 #include <CoreMinimal.h>
 
-#include "InventoryCharacterInterface.h"
 #include "InventoryComponent.h"
 #include "InventoryItem.h"
 #include "EquipInventoryComponent.generated.h"

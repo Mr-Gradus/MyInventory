@@ -24,9 +24,9 @@ void UQuestDialog::NativeConstruct()
 		AcceptButton->OnReleased.AddDynamic(this, &UQuestDialog::AcceptQuest);
 	}
 
-	if (RejectButton)
+	if (CancelButton)
 	{
-		RejectButton->OnReleased.AddDynamic(this, &UQuestDialog::RejectQuest);
+		CancelButton->OnReleased.AddDynamic(this, &UQuestDialog::CancelQuest);
 	}
 
 	APlayerController * PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
@@ -39,10 +39,13 @@ void UQuestDialog::NativeConstruct()
 void UQuestDialog::AcceptQuest()
 {
 	HideDialog();
-	OnQuestAccepted.ExecuteIfBound();
+	if (OnQuestAccepted.IsBound())
+	{
+		OnQuestAccepted.Broadcast();
+	}
 }
 
-void UQuestDialog::RejectQuest()
+void UQuestDialog::CancelQuest()
 {
 	HideDialog();
 }

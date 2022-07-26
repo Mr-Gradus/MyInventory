@@ -40,6 +40,11 @@ public:
 
 	UPROPERTY(VisibleAnywhere)
 	bool bCanBeCompleted;
+
+	virtual AActor* GetInteractiveComponent() const
+	{
+		return nullptr;
+	};
 };
 
 UCLASS()

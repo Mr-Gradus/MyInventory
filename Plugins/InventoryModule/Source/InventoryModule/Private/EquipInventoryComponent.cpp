@@ -1,5 +1,7 @@
 #include "EquipInventoryComponent.h"
 
+#include "InventoryCharacterInterface.h"
+
 UEquipInventoryComponent::UEquipInventoryComponent()
 {
 	EquipSlots.Add(0, EEquipSlot::ES_Head);
@@ -38,10 +40,6 @@ void UEquipInventoryComponent::SetItem(int32 SlotIndex, const FInventorySlotInfo
 	{
 		MyPlayer->EquipItem(EquipSlot, Item.ItemID);
 	}
-	//if (MyPlayer)
-	//{
-	//	MyPlayer->EquipItem(EquipSlot, Item.ItemID);
-	//}
 }
 
 void UEquipInventoryComponent::ClearItem(int32 SlotIndex)

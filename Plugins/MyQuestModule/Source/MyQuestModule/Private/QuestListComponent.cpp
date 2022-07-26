@@ -42,14 +42,15 @@ void UQuestListComponent::AddQuest(AQuest* Quest)
 	{
 		AcceptedQuests.AddUnique(Quest);
 		Quest->TakeQuest(GetOwner());
-		Quest->OnQuestStatusUpdated.AddLambda([this](AQuest* ChangedQuest)
+		Quest->OnQuestStatusUpdated.AddLambda([this](AQuest* ChangedQuest )
 		{
 			if (ActiveQuest == ChangedQuest && OnActiveQuestChanged.IsBound())
 			{
 				OnActiveQuestChanged.Broadcast(ChangedQuest);
 			}
-		 });   
-	}
+		 });
+		 
+	} 
 }
 
 void UQuestListComponent::SetActiveQuest(AQuest* Quest)
