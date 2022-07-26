@@ -1,5 +1,9 @@
 #include "QuestListComponent.h"
 
+UQuestListComponent::UQuestListComponent()
+{
+	PrimaryComponentTick.bCanEverTick = true;
+}
 
 const TArray<AQuest*>& UQuestListComponent::GetQuests()
 {
@@ -22,6 +26,11 @@ void UQuestListComponent::BeginPlay()
 	    CurrentObjectivesWidget->AddToViewport();
     }
 
+}
+
+void UQuestListComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+{
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 }
 
 void UQuestListComponent::AddQuest(AQuest* Quest)

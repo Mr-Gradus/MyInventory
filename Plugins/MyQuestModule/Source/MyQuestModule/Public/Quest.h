@@ -46,6 +46,12 @@ public:
 	UFUNCTION(BlueprintCallable, CallInEditor)
 	void AddInteractObjective();
 
+	UFUNCTION(BlueprintCallable, CallInEditor)
+	void AddCollectedObjective();
+
+	UFUNCTION(BlueprintCallable, CallInEditor)
+	void AddKilledObjective();
+
 	UFUNCTION()
 	TArray<AActor*> GetObjectiveComponents();
 

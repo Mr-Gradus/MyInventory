@@ -25,7 +25,7 @@ class MYQUESTMODULE_API UObjective : public UObject
 	GENERATED_BODY()
 
 public:
-	virtual void ActivateObjective(AActor * Character) {}
+	virtual void ActivateObjective(AActor* Character) {}
 
 	UPROPERTY(EditAnywhere)
 	FText Description;
@@ -55,7 +55,7 @@ class MYQUESTMODULE_API UInteractionObjective : public UObjective
 public:
 	UInteractionObjective();
 
-	virtual void ActivateObjective(AActor * Character) override;
+	virtual void ActivateObjective(AActor* Character) override;
 
 	UPROPERTY(EditAnywhere, meta = (AllowedClasses = "InteractableObject"))
 	AActor* Target;
@@ -70,8 +70,38 @@ class MYQUESTMODULE_API ULocationObjective : public UObjective
 public:
 	ULocationObjective();
 
-	virtual void ActivateObjective(AActor * Character) override;
+	virtual void ActivateObjective(AActor* Character) override;
 
 	UPROPERTY(EditAnywhere, meta = (AllowedClasses = "LocationMarker"))
 	AActor* Marker;
+};
+
+UCLASS()
+class MYQUESTMODULE_API UCollectedObjective : public UObjective
+{
+	GENERATED_BODY()
+	
+public:
+	
+	UCollectedObjective();
+
+	virtual void ActivateObjective(AActor* Character) override;
+
+	UPROPERTY(EditAnywhere, meta = (AllowedClasses = "CollectedObject"))
+	AActor* CollectedObject;
+};
+
+UCLASS()
+class MYQUESTMODULE_API UKilledObjective : public UObjective
+{
+	GENERATED_BODY()
+	
+public:
+	
+	UKilledObjective();
+
+	virtual void ActivateObjective(AActor* Character) override;
+
+	UPROPERTY(EditAnywhere, meta = (AllowedClasses = "KilledObject"))
+	AActor* KilledObject;
 };

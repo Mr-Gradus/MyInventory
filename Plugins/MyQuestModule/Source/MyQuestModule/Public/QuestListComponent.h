@@ -14,7 +14,10 @@ class MYQUESTMODULE_API UQuestListComponent : public UActorComponent
 
 	DECLARE_MULTICAST_DELEGATE_OneParam(FOnQuestAction, AQuest*);
 	
-public:	
+public:
+
+	UQuestListComponent();
+
 	const TArray<AQuest*>& GetQuests();
 
 	AQuest* GetActiveQuest() const;
@@ -23,6 +26,9 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
+	
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
 
 	UPROPERTY()
 	TArray<AQuest*> AcceptedQuests;

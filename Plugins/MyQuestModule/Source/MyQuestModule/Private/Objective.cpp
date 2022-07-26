@@ -1,5 +1,8 @@
 #include "Objective.h"
+
+#include "CollectedActor.h"
 #include "InteractableObject.h"
+#include "KilledActor.h"
 #include "LocationMarker.h"
 
 
@@ -46,6 +49,56 @@ void ULocationObjective::ActivateObjective(AActor * Character)
 				if (OnObjectiveCompleted.IsBound())
 				{
 					OnObjectiveCompleted.Broadcast(this);
+				}
+			}
+		});
+	}
+}
+
+
+UCollectedObjective::UCollectedObjective()
+{
+	Type = EObjectiveType::Collect;
+}
+
+void UCollectedObjective::ActivateObjective(AActor* Character)
+{
+	if (ICollectedActor* Collected = Cast<ICollectedActor>(CollectedObject))
+	{
+		Collected->FOnCollected.AddLambda([this, Character](AActor* CollectibleActor, AActor* OverlappedActor)
+		{
+			if (bCanBeCompleted && Character == OverlappedActor)
+			{
+				bIsCompleted = true;
+				
+				if (OnObjectiveCompleted.IsBound())
+				{
+				   OnObjectiveCompleted.Broadcast(this);
+				}
+			}
+		});
+	}
+}
+
+
+UKilledObjective::UKilledObjective()
+{
+	Type = EObjectiveType::Kill;
+}
+
+void UKilledObjective::ActivateObjective(AActor* Character)
+{
+	if (IKilledActor* Killed = Cast<IKilledActor>(KilledObject))
+	{
+		Killed->FOnKilled.AddLambda([this, Character](AActor* KilledActor, AActor* Killer)
+		{
+			if (bCanBeCompleted && Character == Killer)
+			{
+				bIsCompleted = true;
+				
+				if (OnObjectiveCompleted.IsBound())
+				{
+				   OnObjectiveCompleted.Broadcast(this);
 				}
 			}
 		});

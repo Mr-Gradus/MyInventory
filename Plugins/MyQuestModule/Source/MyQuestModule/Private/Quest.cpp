@@ -75,6 +75,16 @@ void AQuest::AddInteractObjective()
 	Objectives.Add(NewObject<UInteractionObjective>(this));
 }
 
+void AQuest::AddCollectedObjective()
+{
+	Objectives.Add(NewObject<UCollectedObjective>(this));
+}
+
+void AQuest::AddKilledObjective()
+{
+	Objectives.Add(NewObject<UKilledObjective>(this));
+}
+
 bool AQuest::IsCompleted()
 {
 	return QuestStatus;
