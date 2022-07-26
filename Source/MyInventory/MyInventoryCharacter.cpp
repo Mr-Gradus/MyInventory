@@ -103,18 +103,10 @@ void AMyInventoryCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-if(InventoryManagerComponent && EquipmentInventoryComponent)
-{
-	InventoryManagerComponent->InitEquipment(EquipmentInventoryComponent);
-}
-
-
-	//	if(InventoryManagerComponent && InventoryComponent)
-//	{
-//		InventoryManagerComponent->Init(InventoryComponent);
-//	}
-	
-	
+	if(InventoryManagerComponent && EquipmentInventoryComponent)
+	{
+		InventoryManagerComponent->InitEquipment(EquipmentInventoryComponent);
+	}
 }
 
 void AMyInventoryCharacter::Interact_Implementation(AActor* ActorInteractedWithObject)
@@ -134,10 +126,11 @@ void AMyInventoryCharacter::Interact_Implementation(AActor* ActorInteractedWithO
 			{
 				if (AQuest * Quest = Cast<AQuest>(Actor))
 				{
-					//if (Quest->bIsTaken() || (Quest->PrerequisitedQuest && !Quest->PrerequisitedQuest->IsCompleted()))
-					//{
-					//	continue;
-					//}
+					if (Quest->bIsTaken || (Quest->PrerequisitedQuest && !Quest->PrerequisitedQuest->IsCompleted()))
+					{
+						continue;
+					}
+
 					if (QuestDialogClass)
 					{
 						UQuestDialog * QuestDialog = CreateWidget<UQuestDialog>(GetWorld(), QuestDialogClass);
