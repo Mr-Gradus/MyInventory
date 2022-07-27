@@ -49,7 +49,7 @@ AMyInventoryCharacter::AMyInventoryCharacter()
 	InventoryComponent = CreateDefaultSubobject<UInventoryComponent>("Inventory");
 	EquipmentInventoryComponent = CreateDefaultSubobject<UEquipInventoryComponent>("EquipInventory");
 	InventoryManagerComponent = CreateDefaultSubobject<UInventoryManagerComponent>("InventoryManager");
-                         
+    QuestListComponent = CreateDefaultSubobject<UQuestListComponent>("QuestList");                     
 
 	// Create a decal in the world to show the cursor's location
 	CursorToWorld = CreateDefaultSubobject<UDecalComponent>("CursorToWorld");
