@@ -18,7 +18,25 @@ class MYQUESTMODULE_API IKilledActor
 
 public:
 
-	FOnKilled FOnKilled;
+	virtual void KilledTarget(AActor* Target, AActor* Killer)
+	{
+		if (OnKilled.IsBound())
+		{
+			OnKilled.Broadcast(Target, Killer);  
+		}
+	}
 
-	virtual void Killed(AActor* DestroyedPawn, AActor* Killer);
+	FOnKilled OnKilled;
+};
+
+UCLASS()
+class MYQUESTMODULE_API AKilledActorObject : public AActor, public IKilledActor
+{
+	GENERATED_BODY()
+
+	UFUNCTION(BlueprintCallable)
+		void OnProjectileCollision(AActor* Projectile)			
+	{
+		KilledTarget(this, Projectile->GetOwner());
+	}
 };

@@ -17,7 +17,25 @@ class MYQUESTMODULE_API ICollectedActor
 	GENERATED_BODY()
 
 public:
-	virtual void CollectedObjective(AActor* CollectibleActor, AActor* OverlappedActor);
+	void CatchUpEvent(AActor* Collectible, AActor* Collector)
+	{
+		if (OnCollected.IsBound())
+		{
+			OnCollected.Broadcast(Collectible, Collector);
+		}
+	}
+	
+	FOnCollected OnCollected;
+};
 
-	FOnCollected FOnCollected;
+UCLASS()
+class MYQUESTMODULE_API ACollectibleActorObject : public AActor, public ICollectedActor
+{
+	GENERATED_BODY()
+	
+	UFUNCTION(BlueprintCallable)
+	void ContactWithActor(AActor* OverlappingActor)
+	{
+		CatchUpEvent(this, OverlappingActor);
+	}
 };

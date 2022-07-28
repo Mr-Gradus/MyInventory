@@ -15,8 +15,7 @@ void UInteractionObjective::ActivateObjective(AActor * Character)
 {
 	if (IInteractableObject * InteractableTarget = Cast<IInteractableObject>(Target))
 	{
-		InteractableTarget->OnInteractionFinished.AddLambda([this, Character](
-		AActor* InteractableObject, const AActor* ActorInteractedWithObject)
+		InteractableTarget->OnInteractionFinished.AddLambda([this, Character](AActor* InteractableObject, const AActor* ActorInteractedWithObject)
 		{
 
 			if (bCanBeCompleted && Character == ActorInteractedWithObject)
@@ -40,8 +39,7 @@ void ULocationObjective::ActivateObjective(AActor * Character)
 {
 	if (ILocationMarker * LocMarker = Cast<ILocationMarker>(Marker))
 	{
-		LocMarker->OnLocationReached.AddLambda([this, Character](
-		AActor* LocationMarker, const AActor* OverlappedActor)
+		LocMarker->OnLocationReached.AddLambda([this, Character](AActor* LocationMarker, const AActor* OverlappedActor)
 		{
 			if (bCanBeCompleted && Character == OverlappedActor)
 			{
@@ -65,10 +63,12 @@ void UCollectedObjective::ActivateObjective(AActor* Character)
 {
 	if (ICollectedActor* Collected = Cast<ICollectedActor>(CollectedObject))
 	{
-		Collected->FOnCollected.AddLambda([this, Character](AActor* CollectibleActor, AActor* OverlappedActor)
+		Collected->OnCollected.AddLambda([this, Character](AActor* CollectibleActor, AActor* OverlappedActor)
 		{
 			if (bCanBeCompleted && Character == OverlappedActor)
 			{
+				CollectedObject->SetActorHiddenInGame(true);
+
 				bIsCompleted = true;
 				
 				if (OnObjectiveCompleted.IsBound())
@@ -90,10 +90,12 @@ void UKilledObjective::ActivateObjective(AActor* Character)
 {
 	if (IKilledActor* Killed = Cast<IKilledActor>(KilledObject))
 	{
-		Killed->FOnKilled.AddLambda([this, Character](AActor* KilledActor, AActor* Killer)
+		Killed->OnKilled.AddLambda([this, Character](AActor* KilledActor, AActor* Killer)
 		{
 			if (bCanBeCompleted && Character == Killer)
 			{
+				KilledObject->Destroy();
+
 				bIsCompleted = true;
 				
 				if (OnObjectiveCompleted.IsBound())
