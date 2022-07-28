@@ -87,7 +87,7 @@ public:
 
 	virtual void ActivateObjective(AActor* Character) override;
 
-	UPROPERTY(EditAnywhere, meta = (AllowedClasses = "CollectedObject"))
+	UPROPERTY(EditAnywhere, meta = (AllowedClasses = "CollectedActor"))
 	AActor* CollectedObject;
 };
 
@@ -102,6 +102,6 @@ public:
 
 	virtual void ActivateObjective(AActor* Character) override;
 
-	UPROPERTY(EditAnywhere, meta = (AllowedClasses = "KilledObject"))
+	UPROPERTY(EditAnywhere, meta = (AllowedClasses = "KilledActor"))
 	AActor* KilledObject;
 };

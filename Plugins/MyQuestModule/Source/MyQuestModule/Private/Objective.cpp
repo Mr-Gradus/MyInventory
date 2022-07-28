@@ -94,7 +94,7 @@ void UKilledObjective::ActivateObjective(AActor* Character)
 		{
 			if (bCanBeCompleted && Character == Killer)
 			{
-				KilledObject->Destroy();
+				KilledObject->SetActorHiddenInGame(true);
 
 				bIsCompleted = true;
 				

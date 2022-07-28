@@ -35,8 +35,8 @@ class MYQUESTMODULE_API AKilledActorObject : public AActor, public IKilledActor
 	GENERATED_BODY()
 
 	UFUNCTION(BlueprintCallable)
-		void OnProjectileCollision(AActor* Projectile)			
+		void OnCollisionTarget(AActor* Pawn)			
 	{
-		KilledTarget(this, Projectile->GetOwner());
+		KilledTarget(this, Pawn->GetOwner());
 	}
 };
