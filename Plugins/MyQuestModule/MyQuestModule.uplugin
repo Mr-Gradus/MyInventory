@@ -19,6 +19,16 @@
 			"Name": "MyQuestModule",
 			"Type": "Runtime",
 			"LoadingPhase": "PreDefault"
+		},
+		{
+			"Name": "QuestEditor",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
+		},
+		{
+			"Name": "QuestNpcManage",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
 		}
 	]
 }
